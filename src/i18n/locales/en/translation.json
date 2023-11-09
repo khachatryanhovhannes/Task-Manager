@@ -1,0 +1,57 @@
+{
+    "NAVIGATION": {
+        "HOME": "Home",
+        "ABOUT": "About Us",
+        "CONTACT": "Contact Us",
+        "PRIVARY": "Privacy"
+    },
+    "MAIN": {
+        "MAIN_TEXT": "Manage all your daily tasks at once, ",
+        "MAIN_TEXT_ORANGE": "easily",
+        "SUB_TEXT": "Stay focused and motivated with visually appealing user interface and the reminders feature that helps you to focus on what's important here and now without missing anything.",
+        "SIGN_IN": "Sign In",
+        "SIGN_UP": "Sign Up"
+    },
+    "ABOUT_US": {
+        "TITLE": "About Us",
+        "TEXT_ONE": "Your Task Manager is more than just a productivity tool - it's a companion in your journey to achieve efficiency and success.",
+        "TEXT_TWO": " Our team is driven by a passion for simplifying the complexities of task management. We're committed to creating an application that makes organizing tasks seamless and stress-free.",
+        "TEXT_THREE": "At Your Task Manager, we value innovation, continuous improvement, and user feedback. We're constantly evolving to meet the dynamic needs of our diverse user base.",
+        "TEXT_FOUR": {
+            "PART_ONE": "We believe in fostering a community of productivity enthusiasts. Feel free to join us in this journey by ",
+            "LINK": "signing up ",
+            "PART_TWO": "for exclusive updates, tips, and offers."
+        },
+        "TEXT_FIVE": {
+            "PART_ONE": "Have questions or suggestions? We'd love to hear from you!",
+            "LINK": " Contact ",
+            "PART_TWO": "us today."
+        }
+    },
+    "CONTACT_US": {
+        "TITLE": "Contact Us",
+        "TEXT_ONE": "At Your Task Manager, we value open communication. Your thoughts and inquiries are vital to us.",
+        "TEXT_TWO": "To get in touch, you can email us at ",
+        "TEXT_THREE": "Additionally, for any business inquiries or collaboration opportunities, please reach out to our team at ",
+        "TEXT_FOUR": {
+            "PART_ONE": "Your questions, suggestions, and feedback are highly valued. We believe in the power of community collaboration to enhance our service. Join us on social media platforms like  ",
+            "PART_TWO": ", ",
+            "PART_THREE": ", and ",
+            "PART_FOUR": " for engaging discussions."
+        },
+        "TEXT_FIVE": {
+            "PART_ONE": "If you'd like to be updated with exclusive news, tips, and offers, consider signing up for our newsletter by visiting ",
+            "LINK": "Sign Up."
+        },
+        "TEXT_SIX": "We are committed to providing quick and helpful responses to your inquiries. Your input is invaluable in our mission to continually improve our services."
+    },
+    "PRIVACY_POLICY": {
+        "TITLE": "Privacy Policy",
+        "TEXT_ONE": "At Your Task Manager, we are committed to protecting your privacy and ensuring the security of your personal information.",
+        "TEXT_TWO": "This Privacy Policy outlines the types of personal information we collect, how we use and safeguard it, and your rights in relation to your data.        ",
+        "TEXT_THREE": "We collect and use your personal information solely for the purpose of providing and improving our services, ensuring the security of your data, and communicating with you about the service and any updates or news.",
+        "TEXT_FOUR": "We do not sell, trade, or transfer your personal information to third parties without your consent, except as required by law or for providing the service.        ",
+        "TEXT_FIVE": "By using our service, you agree to the collection and use of information in accordance with this policy.        ",
+        "TEXT_SIX": "For detailed information on the type of data collected, its usage, and your rights, please read our full Privacy Policy.        "
+    }
+}

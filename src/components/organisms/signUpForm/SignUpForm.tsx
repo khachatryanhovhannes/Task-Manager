@@ -1,0 +1,60 @@
+import { HStack, FormControl, Stack } from "@chakra-ui/react"
+import { FormControlField, PasswordField } from "../../molecules"
+import { FormButton } from "../../atoms"
+import { FormEventHandler } from "react"
+import { FieldErrors, UseFormRegister } from "react-hook-form"
+import { emailValidation, passwordValidation, nameValidation } from '../../../helpers/validations';
+
+type SignUpFormProps = {
+    handleSubmit: FormEventHandler<HTMLDivElement>;
+    register: UseFormRegister<any>;
+    errors: FieldErrors<any>;
+};
+
+function SignUpForm({ handleSubmit, register, errors }: SignUpFormProps) {
+
+    return (
+        <FormControl as="form"
+            rounded="lg"
+            boxShadow="2xl"
+            boxSize={{ base: '100%', sm: '500px' }}
+            p={8} onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+                <HStack>
+                    <FormControlField
+                        id="firstName"
+                        type="text"
+                        text="First Name"
+                        register={register}
+                        error={errors.firstName}
+                        validation={nameValidation}
+                    />
+                    <FormControlField
+                        id="lastName"
+                        type="text"
+                        text="Last Name"
+                        register={register}
+                        error={errors.lastName}
+                        validation={nameValidation}
+                    />
+                </HStack>
+                <FormControlField
+                    id="email"
+                    type="email"
+                    text="Email address"
+                    register={register}
+                    error={errors.email}
+                    validation={emailValidation}
+                />
+                <PasswordField
+                    register={register}
+                    error={errors.password}
+                    validation={passwordValidation}
+                />
+                <FormButton text="Sign IN" />
+            </Stack>
+        </FormControl>
+    )
+}
+
+export default SignUpForm

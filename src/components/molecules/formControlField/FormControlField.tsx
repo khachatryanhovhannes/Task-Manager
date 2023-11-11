@@ -1,6 +1,7 @@
-import { FormControl} from '@chakra-ui/react';
+import { FormControl } from '@chakra-ui/react';
 import { InputField, FormLabelField, ErrorMessage } from "../../atoms"
 import { FieldError, FieldErrorsImpl, Merge, UseFormRegister } from "react-hook-form"
+import { useTranslation } from 'react-i18next';
 
 interface IFormControlField {
     id: string,
@@ -8,10 +9,12 @@ interface IFormControlField {
     type: string,
     register: UseFormRegister<any>,
     error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-    validation: {}
+    validation: {},
+    translationPath: string
 }
 
-function FormControlField({ id, error, type, text, register, validation }: IFormControlField) {
+function FormControlField({ id, error, type, text, register, validation, translationPath }: IFormControlField) {
+    const { t } = useTranslation()
     return (
         <FormControl id={id}>
             <FormLabelField text={text} />
@@ -19,10 +22,9 @@ function FormControlField({ id, error, type, text, register, validation }: IForm
                 type={type}
                 name={id}
                 register={register}
-                error={error}
                 validation={validation}
             />
-            <ErrorMessage text={error?.message?.toString()} />
+            <ErrorMessage text={error?.message ? t(`${translationPath}.${error?.message?.toString()}`) : undefined} />
         </FormControl>
     )
 }

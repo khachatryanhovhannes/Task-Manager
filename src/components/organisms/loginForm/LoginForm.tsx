@@ -1,9 +1,10 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { FormControl, Stack } from '@chakra-ui/react';
-import { FormControlField, CheckBoxField, TextField, FormButton } from '../../atoms';
+import { FormControlField, CheckBoxField, FormButton } from '../../atoms';
 import { PasswordField } from '../../molecules';
 import { FormEventHandler } from 'react';
 import { emailValidation, passwordValidation } from '../../../helpers/validations';
+import { useTranslation } from 'react-i18next';
 
 
 type LoginFormProps = {
@@ -13,6 +14,9 @@ type LoginFormProps = {
 };
 
 function LoginForm({ handleSubmit, register, errors }: LoginFormProps) {
+
+    const { t } = useTranslation()
+
 
     return (
         <FormControl
@@ -26,29 +30,30 @@ function LoginForm({ handleSubmit, register, errors }: LoginFormProps) {
                 <FormControlField
                     id="email"
                     type="email"
-                    text="Email address"
+                    text={t("LOGIN.EMAIL")}
                     register={register}
                     error={errors.email}
                     validation={emailValidation}
-
+                    translationPath='LOGIN.ERRORS.EMAIL'
                 />
 
                 <PasswordField
                     register={register}
                     error={errors.password}
                     validation={passwordValidation}
+                    translationPath='LOGIN.ERRORS.PASSWORD'
                 />
 
                 <Stack spacing={10}>
                     <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                         <CheckBoxField
-                            text="Remember me"
+                            text={t("LOGIN.REMEMBER")}
                             register={register}
                         />
-                        <TextField color="blue.400" />
+                        {/* <Text> Reset Password </Text> */}
                     </Stack>
 
-                    <FormButton text="Sign IN" />
+                    <FormButton text={t("LOGIN.SIGN_IN")} />
                 </Stack>
             </Stack>
         </FormControl>

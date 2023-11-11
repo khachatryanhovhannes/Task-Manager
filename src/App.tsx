@@ -1,10 +1,6 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
-import MyRoutes from "./Navigation/MyRoutes"
+import RoutesBeforeSign from "./navigation/RoutesBeforeSign"
 import './App.css'
-
-
-
-
 
 
 function App() {
@@ -16,7 +12,7 @@ function App() {
       maxH={'100%'}
     >
 
-      <MyRoutes />
+      <RoutesBeforeSign />
     </Box>
   )
 }

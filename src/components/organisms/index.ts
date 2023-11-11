@@ -1,5 +1,5 @@
 import NavBar from './navBar/NavBar';
-import FormHint from './formHint/FormHint';
+import FormHint from '../molecules/formHint/FormHint';
 import LoginForm from './loginForm/LoginForm';
 import SignUpForm from './signUpForm/SignUpForm';
 

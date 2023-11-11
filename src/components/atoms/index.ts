@@ -9,7 +9,6 @@ import HeadingField from './headingField/HeadingField';
 import InputField from './inputField/InputField';
 import LinkField from './linkField/LinkField';
 import ShowPasswordIcon from './showPasswordIcon/ShowPasswordIcon';
-import TextField from './textField/TextField';
 import ErrorMessage from './errorMessage/ErrorMessage';
 import FormLabelField from './formLabelField/FormLabelField';
 
@@ -17,5 +16,5 @@ import FormLabelField from './formLabelField/FormLabelField';
 export {
     LanguageChanger, ButtonField, ChangeColorMode, Logo, CheckBoxField,
     FormButton, FormControlField, HeadingField, InputField, LinkField,
-    ShowPasswordIcon, TextField, ErrorMessage, FormLabelField
+    ShowPasswordIcon, ErrorMessage, FormLabelField
 }

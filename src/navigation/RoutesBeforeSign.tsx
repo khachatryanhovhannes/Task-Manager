@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navigation from "../components/navigation/Navigation"
-import {AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp} from "../pages"
-import Footer from "../components/Footer/Footer"
+import { AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp } from "../pages"
+import Footer from "../components/footer/Footer"
 
 
-function MyRoutes() {
+function RoutesBeforeSign() {
     return (
         <BrowserRouter>
             <Navigation />
@@ -22,4 +22,4 @@ function MyRoutes() {
     )
 }
 
-export default MyRoutes
+export default RoutesBeforeSign

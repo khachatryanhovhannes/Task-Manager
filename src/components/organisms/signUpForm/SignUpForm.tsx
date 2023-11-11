@@ -4,6 +4,7 @@ import { FormButton } from "../../atoms"
 import { FormEventHandler } from "react"
 import { FieldErrors, UseFormRegister } from "react-hook-form"
 import { emailValidation, passwordValidation, nameValidation } from '../../../helpers/validations';
+import { useTranslation } from "react-i18next"
 
 type SignUpFormProps = {
     handleSubmit: FormEventHandler<HTMLDivElement>;
@@ -12,6 +13,9 @@ type SignUpFormProps = {
 };
 
 function SignUpForm({ handleSubmit, register, errors }: SignUpFormProps) {
+
+    const { t } = useTranslation()
+
 
     return (
         <FormControl as="form"
@@ -24,34 +28,38 @@ function SignUpForm({ handleSubmit, register, errors }: SignUpFormProps) {
                     <FormControlField
                         id="firstName"
                         type="text"
-                        text="First Name"
+                        text={t("SIGN_UP.FIRST_NAME")}
                         register={register}
                         error={errors.firstName}
                         validation={nameValidation}
+                        translationPath="SIGN_UP.ERRORS.NAME"
                     />
                     <FormControlField
                         id="lastName"
                         type="text"
-                        text="Last Name"
+                        text={t("SIGN_UP.LAST_NAME")}
                         register={register}
                         error={errors.lastName}
                         validation={nameValidation}
+                        translationPath="SIGN_UP.ERRORS.NAME"
                     />
                 </HStack>
                 <FormControlField
                     id="email"
                     type="email"
-                    text="Email address"
+                    text={t("SIGN_UP.EMAIL")}
                     register={register}
                     error={errors.email}
                     validation={emailValidation}
+                    translationPath="SIGN_UP.ERRORS.EMAIL"
                 />
                 <PasswordField
                     register={register}
                     error={errors.password}
                     validation={passwordValidation}
+                    translationPath="SIGN_UP.ERRORS.PASSWORD"
                 />
-                <FormButton text="Sign IN" />
+                <FormButton text={t("SIGN_UP.SIGN_UP")} />
             </Stack>
         </FormControl>
     )

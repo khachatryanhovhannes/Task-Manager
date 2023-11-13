@@ -3,7 +3,7 @@ import armenianFlag from "../../../assets/images/armenianFlag.png"
 import englishFlag from "../../../assets/images/englishFlag.png"
 import { Image } from "@chakra-ui/react"
 
-function LanguageChanger() {
+function LanguagChangeButton() {
     const { i18n } = useTranslation()
 
     const handleLanguageChange = () => {
@@ -24,4 +24,4 @@ function LanguageChanger() {
     )
 }
 
-export default LanguageChanger
+export default LanguagChangeButton

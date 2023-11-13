@@ -20,7 +20,7 @@ function Login() {
         console.log(data);
     };
     return (
-        <Flex justify={'center'} mt={'20px'}>
+        <Flex justify={'center'} mt={'20px'} mb={'20px'}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} >
                 <Stack align={'center'}>
                     <HeadingField text={t("LOGIN.TITLE")} />

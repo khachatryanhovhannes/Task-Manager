@@ -101,5 +101,23 @@
                 "PASSWORD_ERROR_TWO": "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character"
             }
         }
+    },
+    "FOOTER":{
+        "BOX_ONE":{
+            "TITLE": "Company Info",
+            "TEXT":"Explore our story and learn more about the mission and values that drive our task manager application.",
+            "READ_MORE": "Read More"
+        },
+        "BOX_TWO":{
+            "TITLE":"Useful Links",
+            "HOME":"Home",
+            "PRIVACY_POLICY":"Privary Policy",
+            "CONTACT_US":"Contact Us"
+        }, 
+        "BOX_THREE":{
+            "TITLE":"Connect with Us",
+            "TEXT":"Stay connected on social media for updates, tips, and community discussions."
+        },
+        "TEXT":" Task Manager. All rights reserved."
     }
 }

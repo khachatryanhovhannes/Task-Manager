@@ -4,7 +4,7 @@ import { Box, Flex, IconButton, Stack, Collapse, useColorModeValue, useDisclosur
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ButtonField, ChangeColorMode, LanguageChanger, Logo } from '../atoms/index';
+import { ButtonField, ColorModeButton, LanguagChangeButton, Logo } from '../atoms/index';
 import { NavItem } from '../molecules'
 import { NavBar } from '../organisms'
 
@@ -109,8 +109,8 @@ function Navigation() {
                         : null
                 }
 
-                <LanguageChanger />
-                <ChangeColorMode />
+                <LanguagChangeButton />
+                <ColorModeButton />
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
@@ -119,6 +119,7 @@ function Navigation() {
                     p={4}
                     display={{ lg: 'none' }}
                 />
+
             </Collapse>
             <Outlet />
         </Box>

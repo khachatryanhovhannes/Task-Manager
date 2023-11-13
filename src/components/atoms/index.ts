@@ -1,6 +1,6 @@
-import LanguageChanger from "./languageChanger/LanguageChanger";
+import LanguagChangeButton from "./languageChanger/LanguagChangeButton";
 import ButtonField from './buttonField/ButtonField';
-import ChangeColorMode from './changeColorMode/ChangeColorMode';
+import ColorModeButton from './colorModeButton/ColorModeButton';
 import Logo from './logo/Logo';
 import CheckBoxField from './checkBoxField/CheckBoxField';
 import FormButton from './formButton/FormButton';
@@ -14,7 +14,7 @@ import FormLabelField from './formLabelField/FormLabelField';
 
 
 export {
-    LanguageChanger, ButtonField, ChangeColorMode, Logo, CheckBoxField,
+    LanguagChangeButton, ButtonField, ColorModeButton, Logo, CheckBoxField,
     FormButton, FormControlField, HeadingField, InputField, LinkField,
     ShowPasswordIcon, ErrorMessage, FormLabelField
 }

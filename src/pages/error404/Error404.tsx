@@ -1,18 +1,20 @@
-import {Flex, Text } from "@chakra-ui/react"
+import { Flex, Text } from "@chakra-ui/react";
 
 function Error404() {
-
     return (
-            <Flex
-                alignItems={'center'}
-                justify={'center'}
-                fontSize={'100px'}
-                mt={'100px'}
-            >
-                <Text>ERROR 404</Text> 
-            </Flex>
-            
-    )
+        <Flex
+            alignItems={'center'}
+            justify={'center'}
+            fontSize={'100px'}
+            w={"100%"}
+            h={"100vh"}
+            style={{
+                background: 'linear-gradient(to right, #ffffff, #808080)', // White to grey
+            }}
+        >
+            <Text color="black">ERROR 404</Text>
+        </Flex>
+    );
 }
 
-export default Error404
+export default Error404;

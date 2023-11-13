@@ -23,7 +23,7 @@ function LoginForm({ handleSubmit, register, errors }: LoginFormProps) {
             as="form"
             rounded="lg"
             boxShadow="2xl"
-            boxSize={{ base: '100%', sm: '500px' }}
+            w={{ base: '100%', sm: '500px' }}
             p={8}
             onSubmit={handleSubmit}>
             <Stack spacing={4}>

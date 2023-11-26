@@ -17,7 +17,6 @@ function LoginForm({ handleSubmit, register, errors }: LoginFormProps) {
 
     const { t } = useTranslation()
 
-
     return (
         <FormControl
             as="form"

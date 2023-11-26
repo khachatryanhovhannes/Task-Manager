@@ -1,5 +1,6 @@
-import NavItem from './navItem/NavItem';
-import PasswordField from './passwordField/PasswordField';
-import FormControlField from './formControlField/FormControlField';
+import NavItem from './navItem';
+import PasswordField from './passwordField';
+import FormControlField from './formControlField';
+import FormControlTextArea from './formControlTextArea';
 
-export { NavItem, PasswordField, FormControlField }
+export { NavItem, PasswordField, FormControlField, FormControlTextArea }

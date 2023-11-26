@@ -1,9 +1,12 @@
-import HeadingField from '../../components/atoms/headingField/HeadingField';
-import SignUpForm from '../../components/organisms/signUpForm/SignUpForm';
-import FormHint from '../../components/molecules/formHint/FormHint'
+import HeadingField from '../../components/atoms/headingField';
+import SignUpForm from '../../components/organisms/signUpForm';
+import FormHint from '../../components/molecules/formHint'
 import { Flex, Stack, } from '@chakra-ui/react'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
 
 type FormData = {
     firstName: string,
@@ -15,10 +18,21 @@ type FormData = {
 function SignUp() {
 
     const { t } = useTranslation()
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+        mode: "all"
+    });
     const onSubmit: SubmitHandler<FormData> = (data) => {
         console.log(data);
     };
+
+    const navigate = useNavigate()
+    const user = useAppSelector(state => state.users.user)
+
+    useEffect(() => {
+        if (user) {
+            navigate("/")
+        }
+    })
 
     return (
         <Flex mt={'20px'} justify={'center'}>

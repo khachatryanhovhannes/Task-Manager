@@ -1,6 +1,6 @@
 import { Button, useColorMode } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-
+import { ColorMode } from "../../../models";
 
 function ColorModeButton() {
 
@@ -11,9 +11,9 @@ function ColorModeButton() {
 
         <Button onClick={toggleColorMode}
             bg={'transparent'}
-            _hover={{background:"transparent"}}
+            _hover={{ background: "transparent" }}
             ml={"10px"}>
-            {colorMode === 'light' ?
+            {colorMode === ColorMode.light ?
                 <MoonIcon /> :
                 <SunIcon />
             }

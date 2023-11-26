@@ -3,7 +3,12 @@
         "HOME": "Home",
         "ABOUT": "About Us",
         "CONTACT": "Contact Us",
-        "PRIVARY": "Privacy"
+        "PRIVARY": "Privacy",
+        "USER_PAGE": "My page",
+        "USER_HOME": "Home",
+        "USER_TASKS": "Tasks",
+        "ADD_TASK": "Add Task",
+        "LOG_OUT": "Log out"
     },
     "MAIN": {
         "MAIN_TEXT": "Manage all your daily tasks at once, ",
@@ -102,22 +107,29 @@
             }
         }
     },
-    "FOOTER":{
-        "BOX_ONE":{
+    "FOOTER": {
+        "BOX_ONE": {
             "TITLE": "Company Info",
-            "TEXT":"Explore our story and learn more about the mission and values that drive our task manager application.",
+            "TEXT": "Explore our story and learn more about the mission and values that drive our task manager application.",
             "READ_MORE": "Read More"
         },
-        "BOX_TWO":{
-            "TITLE":"Useful Links",
-            "HOME":"Home",
-            "PRIVACY_POLICY":"Privary Policy",
-            "CONTACT_US":"Contact Us"
-        }, 
-        "BOX_THREE":{
-            "TITLE":"Connect with Us",
-            "TEXT":"Stay connected on social media for updates, tips, and community discussions."
+        "BOX_TWO": {
+            "TITLE": "Useful Links",
+            "HOME": "Home",
+            "PRIVACY_POLICY": "Privary Policy",
+            "CONTACT_US": "Contact Us"
         },
-        "TEXT":" Task Manager. All rights reserved."
+        "BOX_THREE": {
+            "TITLE": "Connect with Us",
+            "TEXT": "Stay connected on social media for updates, tips, and community discussions."
+        },
+        "TEXT": " Task Manager. All rights reserved."
+    },
+    "TASK": {
+        "TITLE_ADD": "Add Task",
+        "TITLE_EDIT": "Edit Task",
+        "TASK_TITLE": "Title",
+        "TASK_DESCTIPTION": "Descripiton",
+        "SUBMIT": "Submit"
     }
 }

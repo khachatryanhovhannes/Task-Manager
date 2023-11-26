@@ -1,5 +1,5 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
-import RoutesBeforeSign from "./navigation/RoutesBeforeSign"
+import RoutesBeforeSign from "./navigation"
 import './App.css'
 
 

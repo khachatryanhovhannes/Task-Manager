@@ -1,9 +1,9 @@
-// Footer.tsx
 import React from 'react';
 import { Box, Flex, Text, Link, IconButton, useColorMode } from '@chakra-ui/react';
 import { FaLinkedin, FaGithub, FaFacebook } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ColorMode } from '../../../models';
 
 const Footer: React.FC = () => {
     const { colorMode } = useColorMode();
@@ -16,10 +16,9 @@ const Footer: React.FC = () => {
 
     return (
         <Box
-            mt={'10px'}
             as="footer"
-            bg={colorMode === 'dark' ? 'gray.800' : 'gray.200'}
-            color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            bg={colorMode === ColorMode.dark ? 'gray.800' : 'gray.200'}
+            color={colorMode === ColorMode.dark ? 'white' : 'gray.800'}
         >
             <Flex
                 align="center"

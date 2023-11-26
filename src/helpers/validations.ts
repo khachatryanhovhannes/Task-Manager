@@ -26,4 +26,8 @@ const nameValidation = {
     maxLength: { value: 20, message: 'NAME_ERROR_THREE' }
 }
 
-export { emailValidation, passwordValidation, nameValidation }
+const taskValidation = {
+    required: "ay qezi ban"
+}
+
+export { emailValidation, passwordValidation, nameValidation, taskValidation }

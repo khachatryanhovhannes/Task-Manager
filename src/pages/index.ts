@@ -1,10 +1,14 @@
-import AboutUs from './aboutUs/AboutUs';
-import Contact from './contact/Contact';
-import Error404 from './error404/Error404';
-import Home from './home/Home';
-import Login from './login/Login';
-import PrivacyPolicy from './privacyPolicy/PrivacyPolicy';
-import SignUp from './signUp/SignUp';
+import AboutUs from './aboutUs';
+import Contact from './contact';
+import Error404 from './error404';
+import Home from './home';
+import Login from './login';
+import PrivacyPolicy from './privacyPolicy';
+import SignUp from './signUp';
+import Tasks from './tasks/Tasks';
+import AddTask from './addTask';
+import EditTask from './editTask';
+import SingleTask from './singleTask';
 
 
-export {AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp}
+export { AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp, Tasks, AddTask, EditTask, SingleTask }

@@ -5,10 +5,11 @@ import Home from './home';
 import Login from './login';
 import PrivacyPolicy from './privacyPolicy';
 import SignUp from './signUp';
-import Tasks from './tasks/Tasks';
+import Tasks from './tasks';
 import AddTask from './addTask';
 import EditTask from './editTask';
 import SingleTask from './singleTask';
+import User from './user';
 
 
-export { AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp, Tasks, AddTask, EditTask, SingleTask }
+export { AboutUs, Contact, Error404, Home, Login, PrivacyPolicy, SignUp, Tasks, AddTask, EditTask, SingleTask, User }

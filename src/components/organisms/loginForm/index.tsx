@@ -1,9 +1,9 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { FormControl, Stack } from '@chakra-ui/react';
-import { FormControlField, CheckBoxField, FormButton } from '../../atoms';
-import { PasswordField } from '../../molecules';
+import { CheckBoxField, FormButton } from '../../atoms';
+import { PasswordField, FormControlField } from '../../molecules';
 import { FormEventHandler } from 'react';
-import { emailValidation, passwordValidation } from '../../../helpers/validations';
+import { emailValidation, passwordValidation } from '../../../helpers';
 import { useTranslation } from 'react-i18next';
 
 

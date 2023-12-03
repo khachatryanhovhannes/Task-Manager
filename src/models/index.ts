@@ -4,6 +4,6 @@ export { ColorMode, TaskStatus }
 
 
 
-import { ITask, IUser } from "./interfaces"
+import { ITask, IUser, IUserRegister, IUserLogin, IAddTask } from "./interfaces"
 
-export type { ITask, IUser }
+export type { ITask, IUser, IUserRegister, IUserLogin, IAddTask }

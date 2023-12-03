@@ -3,7 +3,7 @@ import { FormControlField, PasswordField } from "../../molecules"
 import { FormButton } from "../../atoms"
 import { FormEventHandler } from "react"
 import { FieldErrors, UseFormRegister } from "react-hook-form"
-import { emailValidation, passwordValidation, nameValidation } from '../../../helpers/validations';
+import { emailValidation, passwordValidation, nameValidation } from '../../../helpers';
 import { useTranslation } from "react-i18next"
 
 type SignUpFormProps = {

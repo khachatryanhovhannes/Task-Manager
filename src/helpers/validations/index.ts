@@ -15,7 +15,7 @@ const passwordValidation = {
         message: 'PASSWORD_ERROR_ONE'
     },
     pattern: {
-        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/,
+        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[a-zA-Z\d!@#$%]{8,}$/,
         message: "PASSWORD_ERROR_TWO"
     }
 };
@@ -23,11 +23,11 @@ const passwordValidation = {
 const nameValidation = {
     required: 'NAME_ERROR_ONE',
     minLength: { value: 3, message: 'NAME_ERROR_TWO' },
-    maxLength: { value: 20, message: 'NAME_ERROR_THREE' }
+    maxLength: { value: 30, message: 'NAME_ERROR_THREE' }
 }
 
 const taskValidation = {
-    required: "ay qezi ban"
+    required: "REQUARED"
 }
 
 export { emailValidation, passwordValidation, nameValidation, taskValidation }

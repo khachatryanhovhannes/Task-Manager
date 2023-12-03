@@ -4,7 +4,7 @@ import { FormControlField, FormControlTextArea } from '../../molecules';
 import { useTranslation } from "react-i18next";
 import { FormEventHandler } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { taskValidation } from "../../../helpers/validations";
+import { taskValidation } from "../../../helpers";
 
 
 type TaskFormProps = {
@@ -36,7 +36,7 @@ function TaskForm({ handleSubmit, register, errors, translatePath }: TaskFormPro
                         register={register}
                         error={errors.title}
                         validation={taskValidation}
-                        translationPath="SIGN_UP.ERRORS.NAME"
+                        translationPath="TASK"
                     />
 
                     <FormControlTextArea
@@ -45,7 +45,18 @@ function TaskForm({ handleSubmit, register, errors, translatePath }: TaskFormPro
                         register={register}
                         error={errors.description}
                         validation={taskValidation}
-                        translationPath="SIGN_UP.ERRORS.NAME"
+                        translationPath="TASK"
+                    />
+
+                    <FormControlField
+                        id="dueDate"
+                        type="date"
+                        text={t(`${translatePath}.TASK_DATE`)}
+                        register={register}
+                        error={errors.title}
+                        validation={taskValidation}
+                        translationPath="TASK"
+                        min={(new Date()).toISOString().split('T')[0]}
                     />
                     <FormButton text={t(`${translatePath}.SUBMIT`)} />
                 </Stack>

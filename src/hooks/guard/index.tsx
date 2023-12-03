@@ -1,21 +1,26 @@
-// PrivateRoutes.tsx
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useAppSelector } from '../';
 
 interface IPrivateRouteProps {
-  path: string;
-  element: React.ReactNode;
+  path?: string;
+  children: React.ReactElement[];
 }
 
-function PrivateRoutes({ element, path }: IPrivateRouteProps) {
+function PrivateRoutes({ children }: IPrivateRouteProps) {
   const isAuthenticated = useAppSelector((state) => state.users.isAuthenticated);
+  console.log(children)
+//   return isAuthenticated ? (
+//     <Route path="user" >
+//           {
+//     ...children
+// }
+//     </Route>
 
-  return isAuthenticated ? (
-    <Route path={path} element={element} />
-  ) : (
-    <Navigate to="/signin" />
-  );
+//   ) : (
+//     <></>
+//   );
+return isAuthenticated ? children : null
 }
 
 export default PrivateRoutes;

@@ -1,14 +1,13 @@
-'use client'
-
 import { Box, Flex, IconButton, Stack, Collapse, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ButtonField, ColorModeButton, LanguagChangeButton, Logo } from '../../atoms/index';
+import { ButtonField, ColorModeButton, LanguageChangeButton, Logo } from '../../atoms/index';
 import { NavItem } from '../../molecules'
 import { NavBar } from '../../organisms'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { logout } from '../../../redux/features/userReducer'
+import { deleteToken } from '../../../helpers'
 
 interface NavItem {
     label: string
@@ -44,8 +43,9 @@ function Navigation() {
     const isAuthenticated = useAppSelector(state => state.users.isAuthenticated)
 
     const handleLogOut = () => {
+        deleteToken()
         dispatch(logout())
-        navigate("/")
+        navigate("/signin")
     }
 
     return (
@@ -134,7 +134,7 @@ function Navigation() {
 
                 }
 
-                <LanguagChangeButton />
+                <LanguageChangeButton />
                 <ColorModeButton />
             </Flex>
 

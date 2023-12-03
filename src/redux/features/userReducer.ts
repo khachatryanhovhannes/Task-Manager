@@ -13,11 +13,6 @@ interface UserState {
 const initialState: UserState = {
     user: null,
     isAuthenticated: false,
-    // user: {
-    //     firstname:"Hovhannes",
-    //     lastname: "Khachatryan",
-    //     token:"casgdvcshvjkjcadsh686sa7vf8sv"
-    // }
 }
 export const userSlice = createSlice({
     name: 'user',

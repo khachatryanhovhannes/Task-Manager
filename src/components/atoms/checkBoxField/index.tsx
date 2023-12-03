@@ -1,18 +1,19 @@
-import { Checkbox } from "@chakra-ui/react"
-import { UseFormRegister } from "react-hook-form"
+import { Checkbox } from "@chakra-ui/react";
+import { UseFormRegister } from "react-hook-form";
 
 interface ICheckBoxFieldProps {
-    text: string,
-    register: UseFormRegister<any>,
+    text: string;
+    register: UseFormRegister<{ remember: boolean }>;
 }
 
-function CheckBoxField({ text, register}: ICheckBoxFieldProps) {
+function CheckBoxField({ text, register }: ICheckBoxFieldProps) {
     return (
         <Checkbox
             {...register('remember')}
-        >{text}</Checkbox>
-    )
+        >
+            {text}
+        </Checkbox>
+    );
 }
 
-
-export default CheckBoxField
+export default CheckBoxField;

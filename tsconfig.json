@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "baseUrl": "src",
+    "paths": {
+      "test-utils": [
+        "./jest.config.cjs"
+      ]
+    },
     "useDefineForClassFields": true,
     "lib": [
       "ES2020",
@@ -16,6 +22,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -25,9 +32,10 @@
   "include": [
     "src"
   ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "types": [
+    "testing-library__jest-dom"
+  ],
+  "typeRoots": [
+    "./node_modules/@types"
   ]
 }

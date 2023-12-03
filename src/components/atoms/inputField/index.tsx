@@ -6,12 +6,14 @@ interface IInputFieldProps {
     type: string,
     name: string,
     register: UseFormRegister<any>,
-    validation: {}
+    validation: {},
+    min?: string | undefined | number;
 }
 
-function InputField({ type, name, register, validation }: IInputFieldProps) {
+function InputField({ type, name, register, validation, min }: IInputFieldProps) {
     return (
         <Input
+            min={min}
             borderWidth={'3px'}
             type={type}
             {...register(name, { ...validation })}

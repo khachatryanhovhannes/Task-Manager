@@ -130,6 +130,7 @@
         "TITLE_EDIT": "Edit Task",
         "TASK_TITLE": "Title",
         "TASK_DESCTIPTION": "Descripiton",
-        "SUBMIT": "Submit"
+        "SUBMIT": "Submit",
+        "REQUARED": "This field is required"
     }
 }

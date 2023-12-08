@@ -4,21 +4,27 @@ import { useTranslation } from "react-i18next";
 import { TaskModifield } from "../../components/templates";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import { editTaskToState } from "../../redux/features/tasksReducer";
-import { editTask } from "../../services/apiService";
+import { editTask } from "../../redux/actions/taskActions";
+import { ToastId, useToast } from "@chakra-ui/react";
+import { toastOptions } from "../../helpers";
+import { ToastStatus } from "../../models";
+import { useEffect, useRef } from "react";
 
 function EditTask() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { id } = useParams();
+  const numericId = Number(id);
+  const toast = useToast();
+  const toastIdRef = useRef<ToastId | undefined>(undefined);
+  const { isTaskEventLoading, taskEventError, isTaskModify } = useAppSelector(
+    (state) => state.tasks
+  );
 
-  const task = useAppSelector((state) => state.tasks.tasks).filter((task) => {
-    if (id !== undefined && +id === task.id) {
-      console.log(task);
-      return task;
-    }
-  });
+  const task = useAppSelector((state) => state.tasks.tasks).find(
+    (task) => numericId === task.id
+  );
 
   const {
     register,
@@ -26,19 +32,36 @@ function EditTask() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      ...task[0],
-      dueDate: task[0].dueDate.substring(0, 10),
-    },
+      ...task,
+      dueDate: task?.dueDate.substring(0, 10),
+    } as ITask,
     mode: "all",
   });
 
-  const onSubmit: SubmitHandler<ITask> = (data) => {
-    console.log(data);
-    
-    editTask(data).then((res) => {
-      dispatch(editTaskToState(res));
+  const toastModify = (status: ToastStatus, message: string) => {
+    if (status === ToastStatus.loading) {
+      toastIdRef.current = toast(
+        toastOptions({ status: status, message: message })
+      );
+    }
+    if (toastIdRef.current) {
+      toast.update(toastIdRef.current, { status: status, title: message });
+    }
+  };
+
+  useEffect(() => {
+    if (isTaskEventLoading) {
+      toastModify(ToastStatus.loading, "Task is editing");
+    } else if (taskEventError) {
+      toastModify(ToastStatus.error, "Task doesn't edit!!");
+    } else if (isTaskModify) {
+      toastModify(ToastStatus.success, "Task edited!");
       navigate("/user/tasks");
-    });
+    }
+  }, [isTaskEventLoading, taskEventError, isTaskModify]);
+
+  const onSubmit: SubmitHandler<ITask> = (data) => {
+    dispatch(editTask(data));
   };
 
   return (

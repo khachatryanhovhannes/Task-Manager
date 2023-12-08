@@ -3,16 +3,16 @@ import {
   HeadingField,
   FormHint,
   LoginForm,
+  Loader,
 } from "../../components";
 import { Flex, Stack } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { getUserInfo, userLogin } from "../../services/apiService";
-import { useState } from "react";
-import { useAppDispatch } from "../../hooks";
-import { login } from "../../redux/features/userReducer";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { getUserInfo, userLogin } from "../../redux/actions/userActions";
+import { clearIsRegister } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "../../helpers";
 
 type FormData = {
   email: string;
@@ -21,37 +21,41 @@ type FormData = {
 };
 
 function Login() {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
+  const errorMessage = useAppSelector((state) => state.users.error);
+  const isLoading = useAppSelector((state) => state.users.isLoading);
+  const user = useAppSelector((state) => state.users.user);
+  const isAuthenticated = useAppSelector(
+    (state) => state.users.isAuthenticated
+  );
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ mode: "all" });
 
+  useEffect(() => {
+    dispatch(clearIsRegister());
+    if (isAuthenticated) {
+      dispatch(getUserInfo());
+      navigate("/")
+    }
+  }, [isAuthenticated, user]);
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    userLogin({
-      email: data.email,
-      password: data.password,
-    })
-      .then((res) => {
-        setToken(res.accessToken, data.remember);
-        getUserInfo().then((res) => {
-          dispatch(
-            login(res)
-          );
-          navigate("/");
-        });
+    dispatch(
+      userLogin({
+        email: data.email,
+        password: data.password,
       })
-      .catch((error) => {
-        console.log(error.message);
-        setErrorMessage(error.message);
-      });
+    );
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Flex justify={"center"} mt={"20px"} mb={"20px"}>
       <Stack spacing={8} mx={"auto"} maxW={"lg"}>
         <Stack align={"center"}>

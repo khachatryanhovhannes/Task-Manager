@@ -4,16 +4,12 @@ import {
   ButtonField,
   ColorModeButton,
   Logo,
-  CheckBoxField,
   FormButton,
   HeadingField,
-  InputField,
   LinkField,
   Pagination,
   ShowPasswordIcon,
   ErrorMessage,
-  FormLabelField,
-  TextareaField,
 } from "./atoms";
 
 import {
@@ -30,14 +26,11 @@ import {
   SignUpForm,
   Task,
   TaskForm,
+  ChangePasswordForm,
+  ChangeUserData,
 } from "./organisms";
 
-import {
-  TaskModifield,
-  Footer,
-  UserNavigation,
-  Navigation,
-} from "./templates";
+import { TaskModifield, Footer, UserNav, Navigation } from "./templates";
 
 export {
   Loader,
@@ -45,16 +38,12 @@ export {
   ButtonField,
   ColorModeButton,
   Logo,
-  CheckBoxField,
   FormButton,
   HeadingField,
-  InputField,
   LinkField,
   Pagination,
   ShowPasswordIcon,
   ErrorMessage,
-  FormLabelField,
-  TextareaField,
   NavItem,
   PasswordField,
   FormControlField,
@@ -67,6 +56,8 @@ export {
   TaskForm,
   TaskModifield,
   Footer,
-  UserNavigation,
+  UserNav,
+  ChangePasswordForm,
   Navigation,
+  ChangeUserData,
 };

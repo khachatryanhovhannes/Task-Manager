@@ -6,7 +6,7 @@ import { ButtonField, ColorModeButton, LanguageChangeButton, Logo } from '../../
 import { NavItem } from '../../molecules'
 import { NavBar } from '../../organisms'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { logout } from '../../../redux/features/userReducer'
+import { logout } from '../../../redux/features/userSlice'
 import { deleteToken } from '../../../helpers'
 
 interface NavItem {
@@ -41,7 +41,7 @@ function Navigation() {
     const user = useAppSelector(state => state.users.user)
     const dispatch = useAppDispatch()
     const isAuthenticated = useAppSelector(state => state.users.isAuthenticated)
-
+    
     const handleLogOut = () => {
         deleteToken()
         dispatch(logout())

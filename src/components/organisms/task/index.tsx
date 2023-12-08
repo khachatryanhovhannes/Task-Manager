@@ -8,11 +8,10 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../../../hooks";
-import { deleteTaskToState } from "../../../redux/features/tasksReducer";
 import { useNavigate } from "react-router-dom";
 
-import { deleteTask } from "../../../services";
-import { ITask } from "models";
+import { ITask } from "../../../models";
+import { deleteTask } from "../../../redux/actions/taskActions";
 
 function Task({ task }: { task: ITask }) {
   const { colorMode } = useColorMode();
@@ -30,9 +29,8 @@ function Task({ task }: { task: ITask }) {
   };
 
   const handleDeleteTask = (id: number) => {
-    deleteTask(id).then(() => {
-      dispatch(deleteTaskToState(id));
-    });
+    dispatch(deleteTask(id));
+    navigate("/user/tasks")
   };
 
   return (

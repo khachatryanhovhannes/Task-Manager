@@ -18,11 +18,11 @@ const USER_NAV_ITEMS: Array<UserNavItem> = [
   },
   {
     label: "USER_TASKS",
-    href: "/user/tasks",
+    href: "/user/tasks/",
   },
 ];
 
-function UserNavigation() {
+function UserNav() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.users.user);
@@ -56,7 +56,6 @@ function UserNavigation() {
             navigate("/user/add");
           }}
           text={t("NAVIGATION.ADD_TASK")}
-          display={{ base: "none", md: "inline-flex" }}
         />
       </Flex>
 
@@ -65,4 +64,4 @@ function UserNavigation() {
   );
 }
 
-export default UserNavigation;
+export default UserNav;

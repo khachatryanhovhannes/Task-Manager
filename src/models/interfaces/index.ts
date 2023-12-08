@@ -38,4 +38,32 @@ interface IUserLogin {
   password: string;
 }
 
-export type { IUserLogin, IUserRegister, IUser, ITask, IAddTask };
+interface IUserChangePassword {
+  email: string;
+  password: string;
+  newPassword: string;
+}
+
+interface IUserChangeData {
+  newEmail?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+interface IGetTasksParapms {
+  skip: number;
+  take: number;
+  date?: string;
+  status?: string;
+}
+
+export type {
+  IGetTasksParapms,
+  IUserLogin,
+  IUserRegister,
+  IUser,
+  ITask,
+  IAddTask,
+  IUserChangePassword,
+  IUserChangeData,
+};

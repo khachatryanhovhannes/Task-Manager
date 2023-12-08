@@ -3,17 +3,26 @@ import {
   SignUpForm,
   FormHint,
   ErrorMessage,
+  Loader,
 } from "../../components";
 import { Flex, Stack } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { userRegister } from "./../../services";
 import { IUserRegister } from "models";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { userRegister } from "../../redux/actions/userActions";
+import { useEffect } from "react";
 
 function SignUp() {
-  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const {
+    isRegister,
+    isAuthenticated,
+    isLoading,
+    error: errorMessage,
+  } = useAppSelector((state) => state.users);
   const { t } = useTranslation();
   const {
     register,
@@ -23,22 +32,23 @@ function SignUp() {
     mode: "all",
   });
 
-  const navigate = useNavigate();
-
   const onSubmit: SubmitHandler<IUserRegister> = (data) => {
-    userRegister(data)
-      .then((res) => {
-        if (res) {
-          navigate("/signin");
-        }
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-      });
+    dispatch(userRegister(data));
   };
 
-  return (
-    <Flex mt={"20px"} justify={"center"}>
+  useEffect(() => {
+    if (isRegister) {
+      navigate("/signin");
+    }
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isRegister]);
+
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <Flex mt={"20px"} justify={"center"} mb={"20px"}>
       <Stack spacing={8} mx={"auto"} maxW={"lg"}>
         <Stack align={"center"}>
           <HeadingField text={t("SIGN_UP.TITLE")} />

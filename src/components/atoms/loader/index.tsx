@@ -1,20 +1,23 @@
-import { Oval } from 'react-loader-spinner'
+import { Flex } from "@chakra-ui/react";
+import { Oval } from "react-loader-spinner";
 
 function Loader() {
-    return (
-        <Oval
-            height={200}
-            width={2000}
-            color="#4fa94d"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel='oval-loading'
-            secondaryColor="#4fa94d"
-            strokeWidth={5}
-            strokeWidthSecondary={2}
-        />
-    )
+  return (
+    <Flex minH={"80vh"} w={"100%"} justifyContent={"center"} alignItems={"center"}>
+      <Oval
+        height={300}
+        width={300}
+        color="orange"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel="oval-loading"
+        secondaryColor="orange"
+        strokeWidth={5}
+        strokeWidthSecondary={2}
+      />
+    </Flex>
+  );
 }
 
-export default Loader
+export default Loader;

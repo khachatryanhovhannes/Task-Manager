@@ -5,17 +5,15 @@ import {
   useColorMode,
   Flex,
   Select,
+  useToast,
+  ToastId,
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {
-  deleteTaskToState,
-  editTaskToState,
-} from "../../redux/features/tasksReducer";
-import { ColorMode, ITask, TaskStatus } from "../../models";
-import { deleteTask } from "../../services";
-import { ChangeEvent } from "react";
-import { editTask } from "../../services/apiService";
+import { ColorMode, ITask, TaskStatus, ToastStatus } from "../../models";
+import { ChangeEvent, useEffect, useRef } from "react";
+import { editTask, deleteTask } from "../../redux/actions/taskActions";
+import { toastOptions } from "../../helpers";
 
 function SingleTask() {
   const { colorMode } = useColorMode();
@@ -23,8 +21,36 @@ function SingleTask() {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const numericId = Number(id);
-  const tasks = useAppSelector((state) => state.tasks.tasks);
-  const task = tasks.find((task) => numericId === task.id);
+  const toast = useToast();
+  const toastIdRef = useRef<ToastId | undefined>(undefined);
+  const task = useAppSelector((state) => state.tasks.tasks).find(
+    (task) => numericId === task.id
+  );
+  const { isTaskEventLoading, taskEventError, isTaskModify } = useAppSelector(
+    (state) => state.tasks
+  );
+  const toastModify = (status: ToastStatus, message: string) => {
+    if (status === ToastStatus.loading) {
+      toastIdRef.current = toast(
+        toastOptions({ status: status, message: message })
+      );
+    }
+    if (toastIdRef.current) {
+      toast.update(toastIdRef.current, { status: status, title: message });
+    }
+  };
+
+  useEffect(() => {
+    console.log("aasas")
+    if (isTaskEventLoading) {
+      toastModify(ToastStatus.loading, "Task's status is changing");
+    } else if (taskEventError) {
+      toastModify(ToastStatus.error, "Task's status doesn't change!!");
+    } else if (isTaskModify) {
+      toastModify(ToastStatus.success, "Task's status is change!");
+      navigate("/user/tasks");
+    }
+  }, [isTaskEventLoading, taskEventError, isTaskModify]);
 
   const handleGoBack = () => {
     navigate(-1);
@@ -35,23 +61,17 @@ function SingleTask() {
   };
 
   const handleDeleteClick = () => {
-    deleteTask(Number(id)).then((res) => {
-      console.log(res);
-      dispatch(deleteTaskToState(Number(id)));
-    });
-    navigate("/user/tasks");
+    dispatch(deleteTask(numericId));
   };
 
   const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const newStatus = event.target.value;
-    console.log(newStatus);
-
-    editTask({
-      ...task,
-      status: newStatus,
-    } as ITask).then((res) => {
-      dispatch(editTaskToState(res) );
-    });
+    dispatch(
+      editTask({
+        ...task,
+        status: newStatus,
+      } as ITask)
+    );
   };
 
   return (
@@ -90,7 +110,15 @@ function SingleTask() {
           <Text fontSize="2xl" fontWeight="bold" mb={2} maxW={"80%"} mx="auto">
             {task.title}
           </Text>
-          <Text color="gray.600" fontSize="lg" mb={4}>
+          <Text>Due Date: {task.dueDate.substring(0, 10)}</Text>
+          <Text
+            color="gray.300"
+            maxW={"80%"}
+            fontSize="lg"
+            mt={5}
+            mb={4}
+            mx="auto"
+          >
             {task.description}
           </Text>
           <Button colorScheme="teal" ml={4} onClick={handleEditClick}>
@@ -99,6 +127,12 @@ function SingleTask() {
           <Button colorScheme="red" ml={4} onClick={handleDeleteClick}>
             Delete
           </Button>
+          <Flex>
+            <Box mt={5}>
+              <Text>Created At: {task.createdAt.substring(0, 10)}</Text>
+              <Text>Updated At: {task.updatedAt.substring(0, 10)}</Text>
+            </Box>
+          </Flex>
         </Box>
       )}
     </Box>

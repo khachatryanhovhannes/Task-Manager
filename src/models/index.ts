@@ -1,9 +1,25 @@
-import { ColorMode, TaskStatus } from "./enums"
+import { ColorMode, TaskStatus, ToastStatus } from "./enums";
 
-export { ColorMode, TaskStatus }
+export { ColorMode, TaskStatus, ToastStatus };
 
+import {
+  ITask,
+  IUser,
+  IUserRegister,
+  IUserLogin,
+  IUserChangePassword,
+  IUserChangeData,
+  IAddTask,
+  IGetTasksParapms,
+} from "./interfaces";
 
-
-import { ITask, IUser, IUserRegister, IUserLogin, IAddTask } from "./interfaces"
-
-export type { ITask, IUser, IUserRegister, IUserLogin, IAddTask }
+export type {
+  ITask,
+  IUser,
+  IUserRegister,
+  IUserLogin,
+  IAddTask,
+  IUserChangePassword,
+  IUserChangeData,
+  IGetTasksParapms,
+};

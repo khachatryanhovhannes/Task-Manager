@@ -1,20 +1,20 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import lightStyles from "./indexLight.module.css";
 import darkStyles from "./indexDark.module.css";
 import { ColorMode } from "../../../models";
 import { useColorMode } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 interface IPaginationProps {
   pageCount: number;
   activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
 }
 
-function Pagination({ pageCount, activePage, setActivePage }: IPaginationProps) {
+function Pagination({ pageCount, activePage }: IPaginationProps) {
   const { colorMode } = useColorMode();
   const [styles, setStyles] = useState(lightStyles);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (colorMode === ColorMode.dark) {
       setStyles(darkStyles);
@@ -24,22 +24,21 @@ function Pagination({ pageCount, activePage, setActivePage }: IPaginationProps) 
   }, [colorMode]);
 
   const handlePageClick = (selectedItem: { selected: number }) => {
-    setActivePage(selectedItem.selected)
+    navigate(`/user/tasks/${selectedItem.selected + 1}`);
   };
 
   return (
     <ReactPaginate
       containerClassName={styles["pagination-container"]}
       pageClassName={styles["pagination-item"]}
-      activeClassName={styles["pagination-item.selected"]}
-      disabledClassName={styles["pagination-item.disabled"]}
-      breakClassName={styles["pagination-item.break"]}
+      activeClassName={styles["selected"]}
+      disabledClassName={styles["disabled"]}
+      breakClassName={styles["break"]}
       previousClassName={styles["pagination-item"]}
       nextClassName={styles["pagination-item"]}
-      activeLinkClassName={styles["pagination-item.active-link"]}
       breakLabel="..."
       nextLabel="next >"
-      forcePage={activePage}
+      forcePage={activePage - 1}
       onPageChange={handlePageClick}
       pageRangeDisplayed={10}
       pageCount={pageCount}

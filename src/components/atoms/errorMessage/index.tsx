@@ -7,7 +7,8 @@ interface IErrorMessageProps {
 function ErrorMessage({ text }: IErrorMessageProps) {
     return (
         <Text
-            maxW={'100%'}
+            w={'100%'}
+            textAlign={"center"}
             mt={'2px'}
             color={'red.400'}
             fontSize={'13px'}

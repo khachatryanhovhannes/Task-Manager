@@ -1,19 +1,23 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ITask, TaskStatus } from "../../models";
+import { ITask, ToastStatus } from "../../models";
 import { useTranslation } from "react-i18next";
 import { TaskModifield } from "../../components/templates";
-import { useAppDispatch } from "../../hooks";
-import { addTaskToState } from "../../redux/features/tasksReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
+import { ToastId, useToast } from "@chakra-ui/react";
 import { toastOptions } from "../../helpers";
-import { addTask } from "../../services/apiService";
+import { addTask } from "../../redux/actions/taskActions";
+import { useEffect, useRef } from "react";
 
 function AddTask() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
+  const toastIdRef = useRef<ToastId | undefined>(undefined);
+  const { isTaskEventLoading, taskEventError, isTaskModify } = useAppSelector(
+    (state) => state.tasks
+  );
   const {
     register,
     handleSubmit,
@@ -21,17 +25,30 @@ function AddTask() {
   } = useForm<ITask>({
     mode: "all",
   });
+  const toastModify = (status: ToastStatus, message: string) => {
+    if (status === ToastStatus.loading) {
+      toastIdRef.current = toast(
+        toastOptions({ status: status, message: message })
+      );
+    }
+    if (toastIdRef.current) {
+      toast.update(toastIdRef.current, { status: status, title: message });
+    }
+  };
+
+  useEffect(() => {
+    if (isTaskEventLoading) {
+      toastModify(ToastStatus.loading, "Task is adding");
+    } else if (taskEventError) {
+      toastModify(ToastStatus.error, "Task doesn't add!!");
+    } else if (isTaskModify) {
+      toastModify(ToastStatus.success, "Task added!");
+      navigate("/user/tasks");
+    }
+  }, [isTaskEventLoading, taskEventError, isTaskModify]);
 
   const onSubmit: SubmitHandler<ITask> = (data) => {
-    toast(toastOptions({ status: "loading", message: "Task is adding" }));
-
-    addTask({...data, status:TaskStatus.toDo})
-    .then(res=>{
-        dispatch(addTaskToState(res))
-        navigate("/user/tasks");
-    })
-
-    toast(toastOptions({ status: "success", message: "Task added!" }));
+    dispatch(addTask(data));
   };
 
   return (

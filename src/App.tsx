@@ -1,37 +1,30 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
-import RoutesBeforeSign from "./navigation";
+import Routing from "./navigation";
 import "./App.css";
 import { useEffect } from "react";
 import { getToken } from "./helpers";
-import { getUserInfo } from "./services/apiService";
-import { useAppDispatch } from "./hooks";
-import { login } from "./redux/features/userReducer";
+import { getUserInfo } from "./redux/actions/userActions";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { Loader } from "./components";
 
 function App() {
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
+  const bgColor = useColorModeValue("gray.100", "gray.700");
+  const isLoading = useAppSelector((state) => state.users.isLoading);
+  const isAuthenticated = useAppSelector(
+    (state) => state.users.isAuthenticated
+  );
   useEffect(() => {
     if (getToken()) {
-      getUserInfo().then((res) => {
-        dispatch(
-          login({
-            email: res.email,
-            firstname: res.firstname,
-            lastname: res.lastname,
-          })
-        );
-      });
+      dispatch(getUserInfo());
     }
-  }, []);
+  }, [isAuthenticated]);
 
-  return (
-    <Box
-      className="App"
-      bg={useColorModeValue("gray.100", "gray.700")}
-      minH={"100vh"}
-      maxH={"100%"}
-    >
-      <RoutesBeforeSign />
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <Box className="App" bg={bgColor} minH={"100vh"} maxH={"100%"}>
+      <Routing />
     </Box>
   );
 }

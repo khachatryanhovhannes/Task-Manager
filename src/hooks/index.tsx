@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "./redux";
-import PrivateRoutes from "./guard";
+import { useAppDispatch, useAppSelector } from "./useRedux";
+import useAuth from "./useAuth";
 
-export {useAppDispatch, useAppSelector, PrivateRoutes}
+export { useAppDispatch, useAppSelector, useAuth };

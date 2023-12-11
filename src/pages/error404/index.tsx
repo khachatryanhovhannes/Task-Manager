@@ -9,7 +9,7 @@ function Error404() {
             w={"100%"}
             h={"100vh"}
             style={{
-                background: 'linear-gradient(to right, #ffffff, #808080)', // White to grey
+                background: 'linear-gradient(to right, #ffffff, #808080)', 
             }}
         >
             <Text color="black">ERROR 404</Text>

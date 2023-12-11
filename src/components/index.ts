@@ -10,6 +10,7 @@ import {
   Pagination,
   ShowPasswordIcon,
   ErrorMessage,
+  CopyRights,
 } from "./atoms";
 
 import {
@@ -17,9 +18,11 @@ import {
   PasswordField,
   FormControlField,
   FormControlTextArea,
+  SocialMediaLink,
 } from "./molecules";
 
 import {
+  SocialMedia,
   NavBar,
   FormHint,
   LoginForm,
@@ -33,6 +36,9 @@ import {
 import { TaskModifield, Footer, UserNav, Navigation } from "./templates";
 
 export {
+  SocialMedia,
+  CopyRights,
+  SocialMediaLink,
   Loader,
   LanguageChangeButton,
   ButtonField,

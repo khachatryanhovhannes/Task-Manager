@@ -1,7 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/react';
 import { FormEventHandler } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { TaskForm } from '../../organisms';
+import { TaskForm } from '../../';
 
 type TaskFormProps = {
     handleSubmit: FormEventHandler<HTMLDivElement>;

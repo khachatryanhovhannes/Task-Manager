@@ -1,5 +1,5 @@
 import { Stack, useColorModeValue } from "@chakra-ui/react";
-import { NavItem } from "../../molecules";
+import { NavItem } from "../../";
 
 interface iNavBarProps {
     NAV_ITEMS: {

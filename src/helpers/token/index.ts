@@ -1,26 +1,26 @@
-function setToken(accessToken: string, remember: boolean) {
+function setToken(tokenName: string, token: string, remember: boolean) {
   if (remember) {
-    document.cookie = `accessToken=${accessToken}; expires=${new Date(
+    document.cookie = `${tokenName}=${token}; expires=${new Date(
       Date.now() + 3600000
     ).toUTCString()}; path=/;`;
   } else {
-    document.cookie = `accessToken=${accessToken}; path=/;`;
+    document.cookie = `accessToken=${token}; path=/;`;
   }
 }
 
-function getToken() {
+function getToken(tokenName: string) {
   const cookies = document.cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
-    if (cookie.startsWith("accessToken=")) {
-      return cookie.substring("accessToken=".length, cookie.length);
+    if (cookie.startsWith(`${tokenName}=`)) {
+      return cookie.substring(`${tokenName}=`.length, cookie.length);
     }
   }
   return null;
 }
 
-function deleteToken(): void {
-  document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+function deleteToken(tokenName: string): void {
+  document.cookie = `${tokenName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
 }
 
 export { getToken, deleteToken, setToken };

@@ -1,6 +1,5 @@
 import { HStack, FormControl, Stack } from "@chakra-ui/react";
-import { FormControlField, PasswordField } from "../../molecules";
-import { FormButton } from "../../atoms";
+import { FormButton, FormControlField, PasswordField } from "../../";
 import { FormEventHandler } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import {

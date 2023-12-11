@@ -3,8 +3,7 @@ import { Box, Flex, Text, Link, useColorMode } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ColorMode } from "../../../models";
-import { SocialMedia } from "../../organisms";
-import { CopyRights } from "../../atoms";
+import { CopyRights, SocialMedia } from "../../";
 
 const Footer: React.FC = () => {
   const { colorMode } = useColorMode();

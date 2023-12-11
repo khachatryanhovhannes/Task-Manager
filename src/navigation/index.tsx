@@ -33,7 +33,7 @@ function Routing() {
             element={<AuthGuardedRouteItem element={<Setting />} />}
           />
           <Route
-            path="tasks/:page?"
+            path="tasks"
             element={<AuthGuardedRouteItem element={<Tasks />} />}
           />
           <Route

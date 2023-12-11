@@ -138,6 +138,57 @@
     "TASK_TITLE": "Վերնագիր",
     "TASK_DESCTIPTION": "Նկարագրություն",
     "SUBMIT": "Ուղարկել",
-    "REQUARED": "Այս դաշտը պարտադիր է"
+    "REQUARED": "Այս դաշտը պարտադիր է",
+    "TASK_DATE": "Վերջնաժամկետը"
+  },
+  "TASKS": {
+    "READ_MORE": "Կարդալ ավելին",
+    "ALL": "Բոլորը",
+    "TO_DO": "Չարված",
+    "IN_PROCESS": "Ընթացիկ",
+    "DONE": "Արված",
+    "EDIT": "Փոփոխել",
+    "DELETE": "Ջնջել",
+    "SETTINGS": "Կարգավորումներ",
+    "NEXT": "Հաջորդ",
+    "PREVIOUS": "Նախորդ"
+  },
+  "SINGLE_TASK": {
+    "GO_BACK": "Հետ",
+    "NO_FOUND": "Թասկը չի գտնվել",
+    "EDIT": "Փոփոխել",
+    "DELETE": "Ջնջել",
+    "GO_TO_ALL": "Գնալ դեպի բոլոր թասկերը",
+    "DUE_DATE": "Վերջնաժամկետ",
+    "CREATED": "Ստեղծված է",
+    "UPDATED": "Փոփոխված է",
+    "TO_DO": "Չարված",
+    "IN_PROCESS": "Ընթացիկ",
+    "DONE": "Արված"
+  },
+  "TASKS_EVENT": {
+    "ADD_SUCCESS": "Թասկը ավելացվեց!",
+    "ADD_LOADING": "Թասկը ավելացվում է!",
+    "ADD_ERROR": "Թասկը չավելացվեց!",
+    "EDIT_SUCCESS": "Թասկը փոփոխվեց!",
+    "EDIT_LOADING": "Թասկը փոփոխվում է!",
+    "EDIT_ERROR": "Թասկը չփոփոխվեց!",
+    "DELETE_SUCCESS": "Թասկը ջնջվեց",
+    "DELETE_LOADING": "Թասկը ջնջվում է",
+    "DELETE_ERROR": "Թասկը չջնջվեց",
+    "STATUS_SUCCESS": "Ստատուսը փոխվեց",
+    "STATUS_LOADING": "Ստատուսը փոխվում է",
+    "STATUS_ERROR": "Ստատուսը չփոխվեց"
+  },
+  "GENERAL_ERRORS": {
+    "ERR_USER_EMAIL_EXISTS": "Օգտատիրոջ էլ.փոստը գոյություն ունի",
+    "ERR_USER_NAME_EXISTS": "Օգտանունը գրանցված է",
+    "ERR_USER_EMAIL_OR_PASSWORD": "սխալ էլ. հասցե կամ գաղտնաբառ",
+    "ERR_USER_NOT_EXISTS": "օգտատերը ԳՈՅՈՒԹՅՈՒՆ ՉՈՒՆԻ",
+    "ERR_USER_EMAIL_IN_USE": "Օգտատիրոջ էլփոստն արդեն օգտագործվում է",
+    "ERR_INVALID_ACCESS_TOKEN": "Անվավեր մուտքի նշան",
+    "ERR_INVALID_REFRESH_TOKEN": "Անվավեր թարմացման նշան",
+    "ERR_TASK_NOT_EXISTS": "Առաջադրանքը գոյություն չունի",
+    "ERR_EMPTY_UPDATED_BODY": "Դատարկ թարմացված մարմին"
   }
 }

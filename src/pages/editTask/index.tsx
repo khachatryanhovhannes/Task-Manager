@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ITask } from "../../models/interfaces";
 import { useTranslation } from "react-i18next";
-import { TaskModifield } from "../../components/templates";
+import { TaskModifield } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { editTask } from "../../redux/actions/taskActions";
@@ -51,11 +51,11 @@ function EditTask() {
 
   useEffect(() => {
     if (isTaskEventLoading) {
-      toastModify(ToastStatus.loading, "Task is editing");
+      toastModify(ToastStatus.loading, t("TASKS_EVENT.EDIT_LOADING"));
     } else if (taskEventError) {
-      toastModify(ToastStatus.error, "Task doesn't edit!!");
+      toastModify(ToastStatus.error, t("TASKS_EVENT.EDIT_ERROR"));
     } else if (isTaskModify) {
-      toastModify(ToastStatus.success, "Task edited!");
+      toastModify(ToastStatus.success, t("TASKS_EVENT.EDIT_SUCCESS"));
       navigate("/user/tasks");
     }
   }, [isTaskEventLoading, taskEventError, isTaskModify]);

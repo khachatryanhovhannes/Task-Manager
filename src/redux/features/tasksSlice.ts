@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import { ITask } from "../../models/interfaces";
 import {
   addTask,
@@ -16,10 +15,12 @@ interface ITasks {
   isTaskEventLoading: boolean;
   isTaskModify: boolean;
   taskEventError: string | undefined;
+  eventPath: string;
 }
 
 const initialState: ITasks = {
   tasks: [],
+  eventPath: "",
   isGeneralTasksLoading: false,
   error: undefined,
   allTasksCount: 0,
@@ -31,24 +32,7 @@ const initialState: ITasks = {
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {
-    addTasksToState: (state, action: PayloadAction<ITask[]>) => {
-      state.tasks = action.payload;
-    },
-    addTaskToState: (state, action: PayloadAction<ITask>) => {
-      state.tasks.push(action.payload);
-    },
-    deleteTaskToState: (state, action: PayloadAction<number>) => {
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-    },
-    editTaskToState: (state, action: PayloadAction<ITask>) => {
-      const oldTaskIndex = state.tasks.findIndex(
-        (task) => task.id === action.payload.id
-      );
-      console.log(oldTaskIndex);
-      state.tasks[oldTaskIndex] = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // --------------- Get Tasks --------------------
     builder.addCase(getTasks.pending, (state) => {
@@ -59,6 +43,7 @@ export const tasksSlice = createSlice({
       state.error = action.error.message;
     });
     builder.addCase(getTasks.fulfilled, (state, action) => {
+      state.error = "";
       state.isGeneralTasksLoading = false;
       if (action.payload._meta) {
         state.allTasksCount = action.payload._meta.total;
@@ -82,6 +67,7 @@ export const tasksSlice = createSlice({
     });
     // --------------- Edit Task --------------------
     builder.addCase(editTask.pending, (state) => {
+      state.eventPath = "STATUS";
       state.isTaskEventLoading = true;
     });
     builder.addCase(editTask.fulfilled, (state) => {
@@ -94,6 +80,7 @@ export const tasksSlice = createSlice({
     });
     // -------------- delete Task -------------------
     builder.addCase(deleteTask.pending, (state) => {
+      state.eventPath = "DELETE";
       state.isTaskEventLoading = true;
     });
     builder.addCase(deleteTask.fulfilled, (state) => {
@@ -107,11 +94,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const {
-  deleteTaskToState,
-  editTaskToState,
-  addTaskToState,
-  addTasksToState,
-} = tasksSlice.actions;
+export const {} = tasksSlice.actions;
 
 export default tasksSlice.reducer;

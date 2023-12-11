@@ -1,5 +1,5 @@
 import { Box, FormControl, Heading, Stack } from "@chakra-ui/react";
-import { FormButton, FormControlField } from "../../../components";
+import { FormButton, FormControlField } from "../../";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IUserChangeData } from "../../../models";
 import { useTranslation } from "react-i18next";

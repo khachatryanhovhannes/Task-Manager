@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react"
-import { LinkField } from '../../atoms';
+import { LinkField } from '../../';
 
 interface IFormHintProps {
     text: string,

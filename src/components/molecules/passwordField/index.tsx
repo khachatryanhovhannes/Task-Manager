@@ -12,7 +12,7 @@ import {
   Merge,
   UseFormRegister,
 } from "react-hook-form";
-import { ErrorMessage, ShowPasswordIcon } from "../../atoms";
+import { ErrorMessage, ShowPasswordIcon } from "../../";
 import { useTranslation } from "react-i18next";
 
 interface IInputPassWordFieldProps {

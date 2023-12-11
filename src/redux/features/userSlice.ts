@@ -7,7 +7,8 @@ import {
   userLogin,
   userRegister,
 } from "../actions/userActions";
-import { setToken } from "../../helpers";
+import { Tokens } from "../../models";
+import { deleteToken, setToken } from "../../helpers";
 // import type { PayloadAction } from '@reduxjs/toolkit'
 // import type { RootState } from '../store/store'
 // import { IUser } from '../../models/interfaces/interfaces';
@@ -25,7 +26,7 @@ const initialState: UserState = {
   user: null,
   isAuthenticated: false,
   isLoading: false,
-  error: undefined,
+  error: "",
   isRegister: false,
   isSaveChnages: false,
 };
@@ -36,10 +37,13 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
+      deleteToken(Tokens.accessToken);
+      deleteToken(Tokens.refreshToken);
     },
     clearIsRegister: (state) => {
       state.isRegister = false;
       state.isSaveChnages = false;
+      state.error = undefined;
     },
   },
   extraReducers: (builder) => {
@@ -63,9 +67,11 @@ export const userSlice = createSlice({
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.isAuthenticated = true;
       state.error = "";
-      setToken(action.payload.accessToken, true);
+      setToken(Tokens.accessToken, action.payload.accessToken, true);
+      setToken(Tokens.refreshToken, action.payload.refreshToken, true);
     });
     builder.addCase(userLogin.rejected, (state, action) => {
+      console.log(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
     });

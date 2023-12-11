@@ -1,5 +1,5 @@
 import { FormControl, FormLabel, Textarea } from "@chakra-ui/react";
-import { ErrorMessage } from "../../atoms";
+import { ErrorMessage } from "../../";
 import {
   FieldError,
   FieldErrorsImpl,

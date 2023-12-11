@@ -9,11 +9,12 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-
 import { ITask } from "../../../models";
 import { deleteTask } from "../../../redux/actions/taskActions";
+import { useTranslation } from "react-i18next";
 
 function Task({ task }: { task: ITask }) {
+  const { t } = useTranslation();
   const { colorMode } = useColorMode();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Task({ task }: { task: ITask }) {
 
   const handleDeleteTask = (id: number) => {
     dispatch(deleteTask(id));
-    navigate("/user/tasks")
+    navigate("/user/tasks");
   };
 
   return (
@@ -53,7 +54,7 @@ function Task({ task }: { task: ITask }) {
       </Text>
       <Flex w={"100%"} justifyContent={"space-between"}>
         <Button variant="link" onClick={handleReadMoreClick}>
-          Read More
+          {t("TASKS.READ_MORE")}
         </Button>
 
         <Text color={"red"}>{task.status}</Text>
@@ -66,7 +67,7 @@ function Task({ task }: { task: ITask }) {
             handleEditClick(task.id);
           }}
         >
-          Edit
+          {t("TASKS.EDIT")}
         </Button>
         <IconButton
           aria-label="Delete"

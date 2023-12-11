@@ -7,20 +7,23 @@ import {
   useToast,
   ToastId,
 } from "@chakra-ui/react";
-import { Task } from "../../components/organisms";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { ErrorMessage, Loader, Pagination } from "../../components";
+import { ErrorMessage, Loader, Pagination, Task } from "../../components";
 import { TaskStatus, ToastStatus } from "../../models";
 import { getTasks } from "../../redux/actions/taskActions";
 import { ONE_PAGE_TASK_COUNT } from "../../constants";
 import { toastOptions } from "../../helpers";
-import { useParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Tasks() {
-  const { page } = useParams();
-  const [status, setStatus] = useState("");
-  const [date, setDate] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [status, setStatus] = useState(searchParams.get("status") || "");
+  const [date, setDate] = useState(searchParams.get("date") || "");
+  const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+  const { t } = useTranslation();
+  const location = useLocation();
   const currentPage = Number(page) || 1;
   const toast = useToast();
   const toastIdRef = useRef<ToastId | undefined>(undefined);
@@ -50,11 +53,11 @@ function Tasks() {
 
   useEffect(() => {
     if (isTaskEventLoading) {
-      toastModify(ToastStatus.loading, "Task is deleting");
+      toastModify(ToastStatus.loading, t("TASKS_EVENT.DELETE_LOADING"));
     } else if (taskEventError) {
-      toastModify(ToastStatus.error, "Task doesn't delete!!");
+      toastModify(ToastStatus.error, t("TASKS_EVENT.DELETE_ERROR"));
     } else if (isTaskModify) {
-      toastModify(ToastStatus.success, "Task deleted!");
+      toastModify(ToastStatus.success, t("TASKS_EVENT.DELETE_SUCCESS"));
     }
   }, [isTaskEventLoading, taskEventError, isTaskModify]);
 
@@ -66,6 +69,14 @@ function Tasks() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const searchParams = new URLSearchParams(location.search);
+
+    setStatus(searchParams.get("status") || "");
+    setDate(searchParams.get("date") || "");
+    setStatus(searchParams.get("status") || "");
+    setDate(searchParams.get("date") || "");
+    setPage(Number(searchParams.get("page")) || 1);
+
     dispatch(
       getTasks({
         take: ONE_PAGE_TASK_COUNT,
@@ -74,14 +85,43 @@ function Tasks() {
         status,
       })
     );
-  }, [currentPage, status, date, isTaskModify]);
+  }, [currentPage, status, date, isTaskModify, searchParams]);
+
+  const updateSearchParams = (params: { [key: string]: string }) => {
+    const currentSearchParams = new URLSearchParams(window.location.search);
+
+    Object.entries(params).forEach(([key, value]) => {
+      currentSearchParams.set(key, value);
+    });
+
+    setSearchParams(currentSearchParams);
+    const queryString = currentSearchParams.toString();
+
+    const pathname = location.pathname;
+    const hash = location.hash;
+
+    const newUrl = `${pathname}?${queryString}${hash}`;
+
+    window.history.pushState({ path: newUrl }, "", newUrl);
+  };
 
   const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setStatus(event.target.value);
+    setPage(1);
+    const selectedStatus = event.target.value;
+    setStatus(selectedStatus);
+    updateSearchParams({ status: selectedStatus });
   };
 
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
+    setPage(1);
+    const selectedDate = event.target.value;
+    setDate(selectedDate);
+    updateSearchParams({ date: selectedDate });
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    updateSearchParams({ page: newPage.toString() });
   };
 
   return (
@@ -92,11 +132,16 @@ function Tasks() {
         width={"100%"}
         justifyContent={{ base: "center", lg: "center", xl: "right" }}
       >
-        <Select w={"300px"} onChange={handleStatusChange} mb={"20px"}>
-          <option value="">All</option>
-          <option value={TaskStatus.toDo}>To Do</option>
-          <option value={TaskStatus.inProgress}>In Progress</option>
-          <option value={TaskStatus.done}>Done</option>
+        <Select
+          w={"300px"}
+          onChange={handleStatusChange}
+          mb={"20px"}
+          value={status}
+        >
+          <option value="">{t("TASKS.ALL")}</option>
+          <option value={TaskStatus.toDo}>{t("TASKS.TO_DO")}</option>
+          <option value={TaskStatus.inProgress}>{t("TASKS.IN_PROCESS")}</option>
+          <option value={TaskStatus.done}>{t("TASKS.DONE")}</option>
         </Select>
         <Input
           type="date"
@@ -125,6 +170,7 @@ function Tasks() {
         <Pagination
           pageCount={Math.ceil(allTasksCount / ONE_PAGE_TASK_COUNT)}
           activePage={currentPage}
+          handlePageChange={handlePageChange}
         />
       ) : null}
     </Box>

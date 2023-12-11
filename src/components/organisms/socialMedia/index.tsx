@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { SocialMediaLink } from "../../molecules";
+import { SocialMediaLink } from "../../";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 function SocialMedia() {

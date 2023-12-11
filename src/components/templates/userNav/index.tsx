@@ -1,8 +1,6 @@
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
-
-import { NavBar } from "../../organisms";
-import ButtonField from "../../atoms/buttonField";
+import { NavBar, ButtonField } from "../../";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../../hooks";
 

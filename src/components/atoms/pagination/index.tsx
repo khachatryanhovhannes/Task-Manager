@@ -4,17 +4,21 @@ import lightStyles from "./indexLight.module.css";
 import darkStyles from "./indexDark.module.css";
 import { ColorMode } from "../../../models";
 import { useColorMode } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 interface IPaginationProps {
   pageCount: number;
   activePage: number;
+  handlePageChange: (arg: number) => void;
 }
 
-function Pagination({ pageCount, activePage }: IPaginationProps) {
+function Pagination({
+  pageCount,
+  activePage,
+  handlePageChange,
+}: IPaginationProps) {
+  const { t } = useTranslation();
   const { colorMode } = useColorMode();
   const [styles, setStyles] = useState(lightStyles);
-  const navigate = useNavigate();
   useEffect(() => {
     if (colorMode === ColorMode.dark) {
       setStyles(darkStyles);
@@ -24,7 +28,7 @@ function Pagination({ pageCount, activePage }: IPaginationProps) {
   }, [colorMode]);
 
   const handlePageClick = (selectedItem: { selected: number }) => {
-    navigate(`/user/tasks/${selectedItem.selected + 1}`);
+    handlePageChange(selectedItem.selected + 1);
   };
 
   return (
@@ -37,12 +41,12 @@ function Pagination({ pageCount, activePage }: IPaginationProps) {
       previousClassName={styles["pagination-item"]}
       nextClassName={styles["pagination-item"]}
       breakLabel="..."
-      nextLabel="next >"
+      nextLabel={`${t("TASKS.NEXT")} >`}
       forcePage={activePage - 1}
       onPageChange={handlePageClick}
       pageRangeDisplayed={10}
       pageCount={pageCount}
-      previousLabel="< previous"
+      previousLabel={`< ${t("TASKS.PREVIOUS")}`}
       renderOnZeroPageCount={null}
     />
   );

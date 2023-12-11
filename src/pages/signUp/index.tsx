@@ -13,13 +13,14 @@ import { IUserRegister } from "models";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { userRegister } from "../../redux/actions/userActions";
 import { useEffect } from "react";
+// import { clearIsRegister } from "../../redux/features/userSlice";
 
 function SignUp() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
     isRegister,
-    isAuthenticated,
+    user,
     isLoading,
     error: errorMessage,
   } = useAppSelector((state) => state.users);
@@ -40,7 +41,7 @@ function SignUp() {
     if (isRegister) {
       navigate("/signin");
     }
-    if (isAuthenticated) {
+    if (user) {
       navigate("/");
     }
   }, [isRegister]);
@@ -60,7 +61,13 @@ function SignUp() {
           link="/signin"
         />
 
-        <ErrorMessage text={errorMessage} />
+        <ErrorMessage
+          text={
+            errorMessage
+              ? t(`GENERAL_ERRORS.${errorMessage.toUpperCase()}`)
+              : ""
+          }
+        />
 
         <SignUpForm
           handleSubmit={handleSubmit(onSubmit)}

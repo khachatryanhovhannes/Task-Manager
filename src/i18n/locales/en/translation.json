@@ -138,6 +138,58 @@
     "TASK_TITLE": "Title",
     "TASK_DESCTIPTION": "Descripiton",
     "SUBMIT": "Submit",
-    "REQUARED": "This field is required"
+    "REQUARED": "This field is required",
+    "TASK_DATE": "End date"
+  },
+
+  "TASKS": {
+    "READ_MORE": "Read more",
+    "ALL": "All",
+    "TO_DO": "To Do",
+    "IN_PROCESS": "In Process",
+    "DONE": "Done",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SETTINGS": "Settings",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous"
+  },
+  "SINGLE_TASK": {
+    "GO_BACK": "Back",
+    "NO_FOUND": "Task not found",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "GO_TO_ALL": "Go to all tasks",
+    "DUE_DATE": "Due Date",
+    "CREATED": "Created At",
+    "UPDATED": "Updated At",
+    "TO_DO": "To Do",
+    "IN_PROCESS": "In Process",
+    "DONE": "Done"
+  },
+  "TASKS_EVENT": {
+    "ADD_SUCCESS": "Task added!",
+    "ADD_LOADING": "Task is adding!",
+    "ADD_ERROR": "Task doesn't add!",
+    "EDIT_SUCCESS": "Task edited!",
+    "EDIT_LOADING": "Task is editing!",
+    "EDIT_ERROR": "Task doesn't edit!",
+    "DELETE_SUCCESS": "Task deleted!",
+    "DELETE_LOADING": "Task is deleting!",
+    "DELETE_ERROR": "Task doesn't delete!",
+    "STATUS_SUCCESS": "Status changed",
+    "STATUS_LOADING": "Status is changing",
+    "STATUS_ERROR": "Status doesn't change"
+  },
+  "GENERAL_ERRORS": {
+    "ERR_USER_EMAIL_EXISTS": "User email exists",
+    "ERR_USER_NAME_EXISTS": "User name exist",
+    "ERR_USER_EMAIL_OR_PASSWORD": "Invalid email or password",
+    "ERR_USER_NOT_EXISTS": "User does not exist",
+    "ERR_USER_EMAIL_IN_USE": "User email is already in use",
+    "ERR_INVALID_ACCESS_TOKEN": "Invalid access token",
+    "ERR_INVALID_REFRESH_TOKEN": "Invalid refresh token",
+    "ERR_TASK_NOT_EXISTS": "Task does not exist",
+    "ERR_EMPTY_UPDATED_BODY": "Empty updated body"
   }
 }

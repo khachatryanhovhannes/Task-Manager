@@ -1,5 +1,5 @@
 import { Box, FormControl, Heading, Stack } from "@chakra-ui/react";
-import { FormButton, PasswordField } from "../../../components";
+import { FormButton, PasswordField } from "../../";
 import { passwordValidation } from "../../../helpers";
 import { IUserChangePassword } from "../../../models";
 import { SubmitHandler, useForm } from "react-hook-form";

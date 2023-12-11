@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ITask, ToastStatus } from "../../models";
 import { useTranslation } from "react-i18next";
-import { TaskModifield } from "../../components/templates";
+import { TaskModifield } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { ToastId, useToast } from "@chakra-ui/react";
@@ -38,11 +38,11 @@ function AddTask() {
 
   useEffect(() => {
     if (isTaskEventLoading) {
-      toastModify(ToastStatus.loading, "Task is adding");
+      toastModify(ToastStatus.loading, t("TASKS_EVENT.ADD_LOADING"));
     } else if (taskEventError) {
-      toastModify(ToastStatus.error, "Task doesn't add!!");
+      toastModify(ToastStatus.error, t("TASKS_EVENT.ADD_ERROR"));
     } else if (isTaskModify) {
-      toastModify(ToastStatus.success, "Task added!");
+      toastModify(ToastStatus.success, t("TASKS_EVENT.ADD_SUCCESS"));
       navigate("/user/tasks");
     }
   }, [isTaskEventLoading, taskEventError, isTaskModify]);

@@ -15,4 +15,9 @@ enum ToastStatus {
   loading = "loading",
 }
 
-export { ColorMode, TaskStatus, ToastStatus };
+enum Tokens {
+  accessToken = "accessToken",
+  refreshToken = "refreshToken",
+}
+
+export { ColorMode, TaskStatus, ToastStatus, Tokens };

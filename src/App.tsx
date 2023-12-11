@@ -15,7 +15,7 @@ function App() {
     (state) => state.users.isAuthenticated
   );
   useEffect(() => {
-    if (getToken()) {
+    if (getToken("accessToken")) {
       dispatch(getUserInfo());
     }
   }, [isAuthenticated]);

@@ -21,7 +21,7 @@ type FormData = {
 };
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const errorMessage = useAppSelector((state) => state.users.error);
   const isLoading = useAppSelector((state) => state.users.isLoading);
@@ -37,12 +37,13 @@ function Login() {
   } = useForm<FormData>({ mode: "all" });
 
   useEffect(() => {
-    dispatch(clearIsRegister());
-    if (isAuthenticated) {
+    if (user) {
+      dispatch(clearIsRegister());
       dispatch(getUserInfo());
-      navigate("/")
+      navigate("/");
     }
   }, [isAuthenticated, user]);
+
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     dispatch(
@@ -67,7 +68,13 @@ function Login() {
           link="/signup"
         />
 
-        <ErrorMessage text={errorMessage} />
+        <ErrorMessage
+          text={
+            errorMessage
+              ? t(`GENERAL_ERRORS.${errorMessage.toUpperCase()}`)
+              : ""
+          }
+        />
 
         <LoginForm
           handleSubmit={handleSubmit(onSubmit)}

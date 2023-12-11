@@ -1,16 +1,10 @@
 import { Box, Flex, Heading, Img, Text, Button } from "@chakra-ui/react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import userImage from "../../assets/images/user.png";
-import { Link } from "react-router-dom"; // Import Link from your router library
-import { useEffect } from "react";
-import { clearIsRegister } from "../../redux/features/userSlice";
+import { Link } from "react-router-dom";
 
 function User() {
   const user = useAppSelector((state) => state.users.user);
-  const dispatch = useAppDispatch()
-  useEffect(()=>{
-    dispatch(clearIsRegister())
-  },[])
   return user ? (
     <Box
       w={"100%"}

@@ -1,11 +1,24 @@
 import { Box, Flex, Heading, Img, Text, Button } from "@chakra-ui/react";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import userImage from "../../assets/images/user.png";
 import { Link } from "react-router-dom";
 import { formatDateString } from "../../helpers";
+import { useEffect } from "react";
+import { getImage } from "../../redux/thunks/userThunks";
+import { useTranslation } from "react-i18next";
 
 function User() {
-  const user = useAppSelector((state) => state.users.user);
+  const { user, imageSource } = useAppSelector((state) => state.users);
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const imagePath = user
+      ? new URL(user.file.imagePath).pathname.split("/").at(-1)
+      : "";
+    dispatch(getImage(imagePath as string));
+  }, []);
+
   return user ? (
     <Box
       w={"100%"}
@@ -19,10 +32,9 @@ function User() {
       <Heading mb={4} color="teal.500">
         {user.firstName} {user.lastName}
       </Heading>
-
       <Flex alignItems={"center"} justify={"center"} gap={"30px"}>
         <Img
-          src={userImage}
+          src={imageSource ? imageSource : userImage}
           maxW={"200px"}
           border={"3px solid black"}
           borderRadius={"full"}
@@ -30,21 +42,29 @@ function User() {
           alt={`${user.firstName} ${user.lastName}`}
         />
         <Box textAlign={"left"}>
-          <Text fontSize="lg">Email: {user.email}</Text>
-          <Text fontSize="lg">Firstname: {user.firstName}</Text>
-          <Text fontSize="lg">Lastname: {user.lastName}</Text>
-          <Text fontSize="lg">Role: {user.role}</Text>
           <Text fontSize="lg">
-            Created At: {formatDateString(user.createdAt)}
+            {t("USER.EMAIL")}: {user.email}
           </Text>
           <Text fontSize="lg">
-            Updated At: {formatDateString(user.updatedAt)}
+            {t("USER.FIRST_NAME")}: {user.firstName}
+          </Text>
+          <Text fontSize="lg">
+            {t("USER.LAST_NAME")}: {user.lastName}
+          </Text>
+          <Text fontSize="lg">
+            {t("USER.ROLE")}: {user.role}
+          </Text>
+          <Text fontSize="lg">
+            {t("USER.CREATED")}: {formatDateString(user.createdAt)}
+          </Text>
+          <Text fontSize="lg">
+            {t("USER.UPDATED")}: {formatDateString(user.updatedAt)}
           </Text>
         </Box>
       </Flex>
       <Link to="/user/setting">
-        <Button colorScheme="teal" mb={4}>
-          Settings
+        <Button colorScheme="teal" mt={10}>
+          {t("USER.SETTINGS")}
         </Button>
       </Link>
     </Box>

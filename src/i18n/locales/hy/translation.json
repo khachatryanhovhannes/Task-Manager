@@ -180,6 +180,15 @@
     "STATUS_LOADING": "Ստատուսը փոխվում է",
     "STATUS_ERROR": "Ստատուսը չփոխվեց"
   },
+  "USER": {
+    "EMAIL": "Էլեկտրոնային հասցե",
+    "FIRST_NAME": "Անուն",
+    "LAST_NAME": "Ազգանուն",
+    "ROLE": "Տեսակ",
+    "CREATED": "Ստեղծված է",
+    "UPDATED": "Փոփոխված է",
+    "SETTINGS": "Կարգավորումներ"
+  },
   "GENERAL_ERRORS": {
     "ERR_USER_EMAIL_EXISTS": "Օգտատիրոջ էլ.փոստը գոյություն ունի",
     "ERR_USER_NAME_EXISTS": "Օգտանունը գրանցված է",
@@ -189,6 +198,7 @@
     "ERR_INVALID_ACCESS_TOKEN": "Անվավեր մուտքի նշան",
     "ERR_INVALID_REFRESH_TOKEN": "Անվավեր թարմացման նշան",
     "ERR_TASK_NOT_EXISTS": "Առաջադրանքը գոյություն չունի",
-    "ERR_EMPTY_UPDATED_BODY": "Դատարկ թարմացված մարմին"
+    "ERR_EMPTY_UPDATED_BODY": "Դատարկ թարմացված մարմին",
+    "VALIDATIONERROR": "Վալիդացիայի սխալ"
   }
 }

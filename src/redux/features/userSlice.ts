@@ -3,15 +3,13 @@ import { IUser } from "../../models";
 import {
   changePassword,
   changeUserinfo,
+  getImage,
   getUserInfo,
   userLogin,
   userRegister,
 } from "../thunks/userThunks";
 import { Tokens } from "../../models";
 import { deleteToken, setToken } from "../../helpers";
-// import type { PayloadAction } from '@reduxjs/toolkit'
-// import type { RootState } from '../store/store'
-// import { IUser } from '../../models/interfaces/interfaces';
 
 interface UserState {
   isAuthenticated: boolean;
@@ -20,6 +18,7 @@ interface UserState {
   isRegister: boolean;
   error: undefined | string | PayloadAction;
   isSaveChnages: boolean;
+  imageSource: null | string;
 }
 
 const initialState: UserState = {
@@ -29,6 +28,7 @@ const initialState: UserState = {
   error: "",
   isRegister: false,
   isSaveChnages: false,
+  imageSource: null,
 };
 export const userSlice = createSlice({
   name: "user",
@@ -130,6 +130,10 @@ export const userSlice = createSlice({
       } else {
         state.error = "something_wrong";
       }
+    });
+    //
+    builder.addCase(getImage.fulfilled, (state, action) => {
+      state.imageSource = action.payload;
     });
   },
 });

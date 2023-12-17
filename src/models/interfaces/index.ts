@@ -16,14 +16,23 @@ interface IAddTask {
   status: string;
 }
 
+interface IFile {
+  createdAt: string;
+  id: number;
+  imagePath: string;
+  updatedAt: string;
+}
+
 interface IUser {
   createdAt: string;
   email: string;
   firstName: string;
   id: number;
+  imageId: string;
   lastName: string;
   role: string;
   updatedAt: string;
+  file: IFile;
 }
 
 interface IUserRegister {
@@ -45,9 +54,10 @@ interface IUserChangePassword {
 }
 
 interface IUserChangeData {
-  newEmail?: string;
+  email?: string;
   firstName?: string;
   lastName?: string;
+  image?: FileList | undefined;
 }
 
 interface IGetTasksParapms {
@@ -57,9 +67,9 @@ interface IGetTasksParapms {
   status?: string;
 }
 
-interface IEditTask{
-  id: number,
-  task: IAddTask
+interface IEditTask {
+  id: number;
+  task: IAddTask;
 }
 
 export type {

@@ -7,7 +7,7 @@ import { emailValidation } from "../../../helpers";
 import { useAppDispatch } from "../../../hooks";
 import { changeUserinfo } from "../../../redux/thunks/userThunks";
 
-function ChangeUserData({ newEmail, firstName, lastName }: IUserChangeData) {
+function ChangeUserData({ email, firstName, lastName }: IUserChangeData) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const {
@@ -16,18 +16,25 @@ function ChangeUserData({ newEmail, firstName, lastName }: IUserChangeData) {
     formState: { errors },
   } = useForm<IUserChangeData>({
     defaultValues: {
-      newEmail,
+      email,
       firstName,
       lastName,
     },
-
     mode: "all",
   });
 
-  const onSubmit: SubmitHandler<IUserChangeData> = (data) => {
-    console.log(data);
-    dispatch(changeUserinfo(data))
+  const onSubmit: SubmitHandler<IUserChangeData> = async (data) => {
+    const formData = new FormData();
+    if (data.image && data.image.length > 0) {
+      formData.append("image", data.image[0] || "");
+    }
+
+    formData.append("firstName", data.firstName || "");
+    formData.append("lastName", data.lastName || "");
+    formData.append("email", data.email || "");
+    dispatch(changeUserinfo(formData as IUserChangeData));
   };
+
   return (
     <Box mt={8} minW={"100%"}>
       <Heading fontSize="xl" mb={4} textAlign={"center"}>
@@ -41,6 +48,15 @@ function ChangeUserData({ newEmail, firstName, lastName }: IUserChangeData) {
         w={{ base: "100%", sm: "500px" }}
         p={8}
       >
+        <FormControlField
+          id="image"
+          type="file"
+          text={t("SIGN_UP.PROFILE_IMAGE")}
+          register={register}
+          error={{}}
+          validation={{}}
+          translationPath="SIGN_UP.ERRORS.IMAGE"
+        />
         <Stack spacing={4}>
           <FormControlField
             id="firstName"
@@ -61,11 +77,11 @@ function ChangeUserData({ newEmail, firstName, lastName }: IUserChangeData) {
             translationPath="SIGN_UP.ERRORS.NAME"
           />
           <FormControlField
-            id="newEmail"
+            id="email"
             type="email"
             text={t("SIGN_UP.EMAIL")}
             register={register}
-            error={errors.newEmail}
+            error={errors.email}
             validation={emailValidation}
             translationPath="SIGN_UP.ERRORS.EMAIL"
           />

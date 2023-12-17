@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ITask } from "../../models/interfaces";
 import { useTranslation } from "react-i18next";
-import { TaskModifield } from "../../components";
+import { TaskModifield, Loader } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { editTask, getTask } from "../../redux/thunks/taskThunks";
@@ -19,22 +19,37 @@ function EditTask() {
   const numericId = Number(id);
   const toast = useToast();
   const toastIdRef = useRef<ToastId | undefined>(undefined);
-  const { singleTask, isTaskEventLoading, taskEventError, isTaskModify } =
-    useAppSelector((state) => state.tasks);
+  const {
+    singleTask,
+    isTaskEventLoading,
+    taskEventError,
+    isTaskModify,
+    isGeneralTasksLoading,
+  } = useAppSelector((state) => state.tasks);
 
   useEffect(() => {
     dispatch(getTask(numericId));
   }, []);
 
+  useEffect(() => {
+    if (singleTask) {
+      setValue("id", singleTask.id);
+      setValue("title", singleTask.title);
+      setValue("description", singleTask.description);
+      setValue("status", singleTask.status);
+      setValue("createdAt", singleTask.createdAt);
+      setValue("updatedAt", singleTask.updatedAt);
+      setValue("dueDate", formatDateString(singleTask.dueDate));
+      setValue("userId", singleTask.userId);
+    }
+  }, [singleTask]);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      ...singleTask,
-      dueDate: formatDateString(singleTask?.dueDate || ""),
-    } as ITask,
+  } = useForm<ITask>({
     mode: "all",
   });
 
@@ -76,13 +91,21 @@ function EditTask() {
   };
 
   return (
-    <TaskModifield
-      handleSubmit={handleSubmit(onSubmit)}
-      errors={errors}
-      register={register}
-      title={t("TASK.TITLE_EDIT")}
-      translatePath="TASK"
-    />
+    <>
+      {isGeneralTasksLoading && !singleTask ? (
+        <Loader />
+      ) : (
+        singleTask && (
+          <TaskModifield
+            handleSubmit={handleSubmit(onSubmit)}
+            errors={errors}
+            register={register}
+            title={t("TASK.TITLE_EDIT")}
+            translatePath="TASK"
+          />
+        )
+      )}
+    </>
   );
 }
 

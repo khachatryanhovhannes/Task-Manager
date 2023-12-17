@@ -40,6 +40,7 @@ export const tasksSlice = createSlice({
       state.isTaskEventLoading = false;
       state.isTaskModify = false;
       state.taskEventError = undefined;
+      state.singleTask = null;
     },
   },
   extraReducers: (builder) => {
@@ -120,6 +121,7 @@ export const tasksSlice = createSlice({
     });
     // -------------- get Task -------------------
     builder.addCase(getTask.pending, (state) => {
+      state.singleTask = null;
       state.isGeneralTasksLoading = true;
     });
     builder.addCase(getTask.rejected, (state, action) => {
@@ -137,6 +139,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const {clearTaskEvents} = tasksSlice.actions;
+export const { clearTaskEvents } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

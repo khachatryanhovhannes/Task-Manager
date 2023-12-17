@@ -56,13 +56,12 @@ const getUserInfo = createAsyncThunk(
 
 const changeUserinfo = createAsyncThunk(
   "user/profilChange",
-
   async (newData: IUserChangeData, { rejectWithValue }) => {
     try {
-      const res = await instance.patch("/users/profile", {
-        email: newData.newEmail,
-        firstName: newData.firstName,
-        lastName: newData.lastName,
+      const res = await instance.patch("/users/profile", newData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       return res.data;
     } catch (error) {
@@ -80,7 +79,6 @@ const changePassword = createAsyncThunk(
   async (newPassword: string, { rejectWithValue }) => {
     try {
       const res = await instance.patch("/auth/password", { newPassword });
-      console.log(res);
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -92,4 +90,35 @@ const changePassword = createAsyncThunk(
   }
 );
 
-export { getUserInfo, userLogin, userRegister, changeUserinfo, changePassword };
+const getImage = createAsyncThunk(
+  "user/getImage",
+  async (path: string, { rejectWithValue }) => {
+    try {
+      const response = await instance.get(`/files/${path}`, {
+        responseType: "arraybuffer",
+      });
+
+      const base64Image = btoa(
+        new Uint8Array(response.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+      const imageUrl = `data:image/jpeg;base64,${base64Image}`;
+      return imageUrl;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch image");
+    }
+  }
+);
+
+export default getImage;
+
+export {
+  getUserInfo,
+  userLogin,
+  userRegister,
+  changeUserinfo,
+  changePassword,
+  getImage,
+};

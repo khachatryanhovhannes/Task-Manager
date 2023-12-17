@@ -24,7 +24,6 @@ function Tasks() {
   const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
   const { t } = useTranslation();
   const location = useLocation();
-  const currentPage = Number(page) || 1;
   const toast = useToast();
   const toastIdRef = useRef<ToastId | undefined>(undefined);
   const {
@@ -59,7 +58,7 @@ function Tasks() {
     } else if (isTaskModify) {
       toastModify(ToastStatus.success, t("TASKS_EVENT.DELETE_SUCCESS"));
     }
-  }, [isTaskEventLoading, taskEventError, isTaskModify]);
+  }, [isTaskEventLoading, taskEventError, isTaskModify, page]);
 
   const dispatch = useAppDispatch();
 
@@ -70,20 +69,18 @@ function Tasks() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const searchParams = new URLSearchParams(location.search);
-
     setDate(searchParams.get("date") || "");
     setStatus(searchParams.get("status") || "");
     setPage(Number(searchParams.get("page")) || 1);
-
     dispatch(
       getTasks({
         take: ONE_PAGE_TASK_COUNT,
-        skip: ONE_PAGE_TASK_COUNT * (currentPage - 1),
+        skip: ONE_PAGE_TASK_COUNT * (page - 1),
         date,
         status,
       })
     );
-  }, [currentPage, status, date, isTaskModify, searchParams]);
+  }, [status, date, isTaskModify, searchParams]);
 
   const updateSearchParams = (params: { [key: string]: string }) => {
     const currentSearchParams = new URLSearchParams(window.location.search);
@@ -99,22 +96,21 @@ function Tasks() {
     const hash = location.hash;
 
     const newUrl = `${pathname}?${queryString}${hash}`;
-
     window.history.pushState({ path: newUrl }, "", newUrl);
   };
 
   const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setPage(1);
     const selectedStatus = event.target.value;
     setStatus(selectedStatus);
-    updateSearchParams({ status: selectedStatus });
+    setPage(1);
+    updateSearchParams({ status: selectedStatus, page: "1" });
   };
 
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPage(1);
     const selectedDate = event.target.value;
     setDate(selectedDate);
-    updateSearchParams({ date: selectedDate });
+    setPage(1);
+    updateSearchParams({ date: selectedDate, page: "1" });
   };
 
   const handlePageChange = (newPage: number) => {
@@ -167,7 +163,7 @@ function Tasks() {
       {tasks.length && allTasksCount > ONE_PAGE_TASK_COUNT ? (
         <Pagination
           pageCount={Math.ceil(allTasksCount / ONE_PAGE_TASK_COUNT)}
-          activePage={currentPage}
+          activePage={page}
           handlePageChange={handlePageChange}
         />
       ) : null}

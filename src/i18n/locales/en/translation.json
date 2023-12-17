@@ -181,6 +181,15 @@
     "STATUS_LOADING": "Status is changing",
     "STATUS_ERROR": "Status doesn't change"
   },
+  "USER": {
+    "EMAIL": "Email address",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "ROLE": "Role",
+    "CREATED": "Created At",
+    "UPDATED": "Updated At",
+    "SETTINGS": "Settings"
+  },
   "GENERAL_ERRORS": {
     "ERR_USER_EMAIL_EXISTS": "User email exists",
     "ERR_USER_NAME_EXISTS": "User name exist",
@@ -190,6 +199,7 @@
     "ERR_INVALID_ACCESS_TOKEN": "Invalid access token",
     "ERR_INVALID_REFRESH_TOKEN": "Invalid refresh token",
     "ERR_TASK_NOT_EXISTS": "Task does not exist",
-    "ERR_EMPTY_UPDATED_BODY": "Empty updated body"
+    "ERR_EMPTY_UPDATED_BODY": "Empty updated body",
+    "VALIDATIONERROR": "Validation error"
   }
 }

@@ -5,7 +5,7 @@ import { IUserChangeData } from "../../../models";
 import { useTranslation } from "react-i18next";
 import { emailValidation } from "../../../helpers";
 import { useAppDispatch } from "../../../hooks";
-import { changeUserinfo } from "../../../redux/actions/userActions";
+import { changeUserinfo } from "../../../redux/thunks/userThunks";
 
 function ChangeUserData({ newEmail, firstName, lastName }: IUserChangeData) {
   const { t } = useTranslation();

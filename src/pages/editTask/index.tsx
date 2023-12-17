@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import { TaskModifield } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import { editTask } from "../../redux/actions/taskActions";
+import { editTask, getTask } from "../../redux/thunks/taskThunks";
 import { ToastId, useToast } from "@chakra-ui/react";
-import { toastOptions } from "../../helpers";
+import { formatDateString, toastOptions } from "../../helpers";
 import { ToastStatus } from "../../models";
 import { useEffect, useRef } from "react";
+import { clearTaskEvents } from "../../redux/features/tasksSlice";
 
 function EditTask() {
   const navigate = useNavigate();
@@ -18,13 +19,12 @@ function EditTask() {
   const numericId = Number(id);
   const toast = useToast();
   const toastIdRef = useRef<ToastId | undefined>(undefined);
-  const { isTaskEventLoading, taskEventError, isTaskModify } = useAppSelector(
-    (state) => state.tasks
-  );
+  const { singleTask, isTaskEventLoading, taskEventError, isTaskModify } =
+    useAppSelector((state) => state.tasks);
 
-  const task = useAppSelector((state) => state.tasks.tasks).find(
-    (task) => numericId === task.id
-  );
+  useEffect(() => {
+    dispatch(getTask(numericId));
+  }, []);
 
   const {
     register,
@@ -32,8 +32,8 @@ function EditTask() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      ...task,
-      dueDate: task?.dueDate.substring(0, 10),
+      ...singleTask,
+      dueDate: formatDateString(singleTask?.dueDate || ""),
     } as ITask,
     mode: "all",
   });
@@ -56,12 +56,23 @@ function EditTask() {
       toastModify(ToastStatus.error, t("TASKS_EVENT.EDIT_ERROR"));
     } else if (isTaskModify) {
       toastModify(ToastStatus.success, t("TASKS_EVENT.EDIT_SUCCESS"));
-      navigate("/user/tasks");
+      navigate(-1);
+      dispatch(clearTaskEvents());
     }
   }, [isTaskEventLoading, taskEventError, isTaskModify]);
 
   const onSubmit: SubmitHandler<ITask> = (data) => {
-    dispatch(editTask(data));
+    dispatch(
+      editTask({
+        id: data.id,
+        task: {
+          title: data.title,
+          description: data.description,
+          dueDate: data.dueDate,
+          status: data.status,
+        },
+      })
+    );
   };
 
   return (

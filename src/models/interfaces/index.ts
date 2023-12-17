@@ -57,7 +57,13 @@ interface IGetTasksParapms {
   status?: string;
 }
 
+interface IEditTask{
+  id: number,
+  task: IAddTask
+}
+
 export type {
+  IEditTask,
   IGetTasksParapms,
   IUserLogin,
   IUserRegister,

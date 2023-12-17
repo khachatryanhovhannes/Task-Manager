@@ -21,33 +21,35 @@ function Routing() {
     <BrowserRouter>
       <RouterConfiguration>
         <Route index element={<Home />} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signIn" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="user">
           <Route index element={<AuthGuardedRouteItem element={<User />} />} />
           <Route
             path="setting"
             element={<AuthGuardedRouteItem element={<Setting />} />}
           />
-          <Route
-            path="tasks"
-            element={<AuthGuardedRouteItem element={<Tasks />} />}
-          />
-          <Route
-            path="add"
-            element={<AuthGuardedRouteItem element={<AddTask />} />}
-          />
-          <Route
-            path="edit/:id"
-            element={<AuthGuardedRouteItem element={<EditTask />} />}
-          />
-          <Route
-            path="task/:id"
-            element={<AuthGuardedRouteItem element={<SingleTask />} />}
-          />
+          <Route path="tasks">
+            <Route
+              index
+              element={<AuthGuardedRouteItem element={<Tasks />} />}
+            />
+            <Route
+              path="add"
+              element={<AuthGuardedRouteItem element={<AddTask />} />}
+            />
+            <Route
+              path=":id/edit"
+              element={<AuthGuardedRouteItem element={<EditTask />} />}
+            />
+            <Route
+              path=":id"
+              element={<AuthGuardedRouteItem element={<SingleTask />} />}
+            />
+          </Route>
         </Route>
         <Route path="*" element={<Error404 />} />
       </RouterConfiguration>

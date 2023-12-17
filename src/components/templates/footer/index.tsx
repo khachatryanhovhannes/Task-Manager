@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
             fontSize="sm"
             color="blue.500"
             onClick={() => {
-              navigate("/aboutus");
+              navigate("/aboutUs");
               scrollToTop();
             }}
           >

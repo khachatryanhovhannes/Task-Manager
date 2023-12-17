@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ErrorMessage, Loader, Pagination, Task } from "../../components";
 import { TaskStatus, ToastStatus } from "../../models";
-import { getTasks } from "../../redux/actions/taskActions";
+import { getTasks } from "../../redux/thunks/taskThunks";
 import { ONE_PAGE_TASK_COUNT } from "../../constants";
 import { toastOptions } from "../../helpers";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -71,10 +71,8 @@ function Tasks() {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const searchParams = new URLSearchParams(location.search);
 
-    setStatus(searchParams.get("status") || "");
     setDate(searchParams.get("date") || "");
     setStatus(searchParams.get("status") || "");
-    setDate(searchParams.get("date") || "");
     setPage(Number(searchParams.get("page")) || 1);
 
     dispatch(

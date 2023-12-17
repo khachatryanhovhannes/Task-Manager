@@ -4,7 +4,7 @@
     "baseUrl": "src",
     "paths": {
       "test-utils": [
-        "./jest.config.cjs"
+        "jest.config.js"
       ]
     },
     "useDefineForClassFields": true,
@@ -13,7 +13,7 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "ESNext",
+    "module": "esnext", // Change this line
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",

@@ -41,12 +41,12 @@ function Pagination({
       previousClassName={styles["pagination-item"]}
       nextClassName={styles["pagination-item"]}
       breakLabel="..."
-      nextLabel={`${t("TASKS.NEXT")} >`}
+      nextLabel={`${t("TASKS.NEXT")}>`}
       forcePage={activePage - 1}
       onPageChange={handlePageClick}
-      pageRangeDisplayed={10}
+      pageRangeDisplayed={1}
       pageCount={pageCount}
-      previousLabel={`< ${t("TASKS.PREVIOUS")}`}
+      previousLabel={`<${t("TASKS.PREVIOUS")}`}
       renderOnZeroPageCount={null}
     />
   );

@@ -51,7 +51,7 @@ function UserNav() {
           border="2px solid orange"
           cursor="pointer"
           onClick={() => {
-            navigate("/user/add");
+            navigate("/user/tasks/add");
           }}
           text={t("NAVIGATION.ADD_TASK")}
         />

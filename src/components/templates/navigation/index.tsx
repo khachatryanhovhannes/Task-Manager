@@ -33,7 +33,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "ABOUT",
-    href: "/aboutus",
+    href: "/aboutUs",
   },
   {
     label: "CONTACT",
@@ -58,7 +58,7 @@ function Navigation() {
 
   const handleLogOut = () => {
     dispatch(logout());
-    navigate("/signin");
+    navigate("/signIn");
   };
 
   return (
@@ -100,8 +100,8 @@ function Navigation() {
           />
         </Flex>
         {!isAuthenticated ? (
-          location.pathname !== "/signin" &&
-          location.pathname !== "/signup" &&
+          location.pathname !== "/signIn" &&
+          location.pathname !== "/signUp" &&
           location.pathname !== "/" &&
           !user ? (
             <Stack
@@ -118,7 +118,7 @@ function Navigation() {
                 bg="orange"
                 hoverBackground="gray.300"
                 cursor="pointer"
-                onClick={() => navigate("/signin")}
+                onClick={() => navigate("/signIn")}
                 text={t("MAIN.SIGN_IN")}
               />
               <ButtonField
@@ -129,7 +129,7 @@ function Navigation() {
                 hoverBackground="gray.300"
                 border="2px solid orange"
                 cursor="pointer"
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/signUp")}
                 text={t("MAIN.SIGN_UP")}
                 display={{ base: "none", md: "inline-flex" }}
               />

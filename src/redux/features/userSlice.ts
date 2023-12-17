@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../models";
 import {
   changePassword,
@@ -6,7 +6,7 @@ import {
   getUserInfo,
   userLogin,
   userRegister,
-} from "../actions/userActions";
+} from "../thunks/userThunks";
 import { Tokens } from "../../models";
 import { deleteToken, setToken } from "../../helpers";
 // import type { PayloadAction } from '@reduxjs/toolkit'
@@ -18,7 +18,7 @@ interface UserState {
   user: IUser | null;
   isLoading: boolean;
   isRegister: boolean;
-  error: undefined | string;
+  error: undefined | string | PayloadAction;
   isSaveChnages: boolean;
 }
 
@@ -56,8 +56,12 @@ export const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(userRegister.rejected, (state, action) => {
-      state.error = action.error.message;
       state.isLoading = false;
+      if (typeof action.payload === "string") {
+        state.error = action.payload;
+      } else {
+        state.error = "something_wrong";
+      }
     });
 
     // ---------- User Login -----------------------
@@ -71,9 +75,12 @@ export const userSlice = createSlice({
       setToken(Tokens.refreshToken, action.payload.refreshToken, true);
     });
     builder.addCase(userLogin.rejected, (state, action) => {
-      console.log(action.error.message);
       state.isLoading = false;
-      state.error = action.error.message;
+      if (typeof action.payload === "string") {
+        state.error = action.payload;
+      } else {
+        state.error = "something_wrong";
+      }
     });
 
     // --------- Get User Info ----------------------
@@ -100,7 +107,11 @@ export const userSlice = createSlice({
     });
     builder.addCase(changePassword.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message;
+      if (typeof action.payload === "string") {
+        state.error = action.payload;
+      } else {
+        state.error = "something_wrong";
+      }
     });
 
     // ----------- Change more info ---------------
@@ -113,8 +124,12 @@ export const userSlice = createSlice({
       state.isSaveChnages = true;
     });
     builder.addCase(changeUserinfo.rejected, (state, action) => {
-      state.error = action.error.message;
       state.isLoading = false;
+      if (typeof action.payload === "string") {
+        state.error = action.payload;
+      } else {
+        state.error = "something_wrong";
+      }
     });
   },
 });

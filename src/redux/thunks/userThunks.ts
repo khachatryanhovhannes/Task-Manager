@@ -5,14 +5,14 @@ import axios from "axios";
 
 const userRegister = createAsyncThunk(
   "user/register",
-  async (newUserData: IUserRegister) => {
+  async (newUserData: IUserRegister, { rejectWithValue }) => {
     try {
       const res = await instance.post("/auth/register", newUserData);
       const data = res.data;
       return data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        return Promise.reject(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
       } else {
         return Promise.reject("Something Wrong");
       }
@@ -22,14 +22,14 @@ const userRegister = createAsyncThunk(
 
 const userLogin = createAsyncThunk(
   "user/login",
-  async (userLoginData: IUserLogin) => {
+  async (userLoginData: IUserLogin, { rejectWithValue }) => {
     try {
       const res = await instance.post("/auth/login", userLoginData);
       const data = await res.data;
       return data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        return Promise.reject(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
       } else {
         return Promise.reject("Something Wrong");
       }
@@ -37,24 +37,27 @@ const userLogin = createAsyncThunk(
   }
 );
 
-const getUserInfo = createAsyncThunk("user/profile", async () => {
-  try {
-    const res = await instance.get("/users/profile");
-    const data = await res.data;
-    return data.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      return Promise.reject(error.response.data.message);
-    } else {
-      return Promise.reject("Something Wrong");
+const getUserInfo = createAsyncThunk(
+  "user/profile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await instance.get("/users/profile");
+      const data = await res.data;
+      return data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return Promise.reject("Something Wrong");
+      }
     }
   }
-});
+);
 
 const changeUserinfo = createAsyncThunk(
   "user/profilChange",
 
-  async (newData: IUserChangeData) => {
+  async (newData: IUserChangeData, { rejectWithValue }) => {
     try {
       const res = await instance.patch("/users/profile", {
         email: newData.newEmail,
@@ -64,7 +67,7 @@ const changeUserinfo = createAsyncThunk(
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        return Promise.reject(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
       } else {
         return Promise.reject("Something Wrong");
       }
@@ -74,14 +77,14 @@ const changeUserinfo = createAsyncThunk(
 
 const changePassword = createAsyncThunk(
   "user/changePassword",
-  async (newPassword: string) => {
+  async (newPassword: string, { rejectWithValue }) => {
     try {
       const res = await instance.patch("/auth/password", { newPassword });
       console.log(res);
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        return Promise.reject(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
       } else {
         return Promise.reject("Something Wrong");
       }

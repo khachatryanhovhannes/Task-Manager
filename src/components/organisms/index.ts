@@ -7,6 +7,7 @@ import TaskForm from "./taskForm";
 import SocialMedia from "./socialMedia";
 import ChangePasswordForm from "./changePasswordForm";
 import ChangeUserData from "./changeUserData";
+import DeleteConfirmationModal from "./deleteConfirmationModal";
 
 export {
   NavBar,
@@ -18,4 +19,5 @@ export {
   SocialMedia,
   ChangePasswordForm,
   ChangeUserData,
+  DeleteConfirmationModal,
 };

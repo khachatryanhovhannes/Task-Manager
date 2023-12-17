@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Img, Text, Button } from "@chakra-ui/react";
 import { useAppSelector } from "../../hooks";
 import userImage from "../../assets/images/user.png";
 import { Link } from "react-router-dom";
+import { formatDateString } from "../../helpers";
 
 function User() {
   const user = useAppSelector((state) => state.users.user);
@@ -34,10 +35,10 @@ function User() {
           <Text fontSize="lg">Lastname: {user.lastName}</Text>
           <Text fontSize="lg">Role: {user.role}</Text>
           <Text fontSize="lg">
-            Created At: {user.createdAt.substring(0, 10)}
+            Created At: {formatDateString(user.createdAt)}
           </Text>
           <Text fontSize="lg">
-            Updated At: {user.updatedAt.substring(0, 10)}
+            Updated At: {formatDateString(user.updatedAt)}
           </Text>
         </Box>
       </Flex>

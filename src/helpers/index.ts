@@ -5,7 +5,8 @@ import {
   nameValidation,
   taskValidation,
 } from "./validations";
-import {setToken, getToken, deleteToken } from "./token";
+import { setToken, getToken, deleteToken } from "./token";
+import { formatDateString } from "./dateFromat";
 
 export {
   toastOptions,
@@ -16,4 +17,5 @@ export {
   setToken,
   getToken,
   deleteToken,
+  formatDateString,
 };

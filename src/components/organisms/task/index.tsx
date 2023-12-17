@@ -10,28 +10,40 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import { ITask } from "../../../models";
-import { deleteTask } from "../../../redux/actions/taskActions";
+import { deleteTask } from "../../../redux/thunks/taskThunks";
 import { useTranslation } from "react-i18next";
+import { DeleteConfirmationModal } from "..";
+import { useState } from "react";
 
 function Task({ task }: { task: ITask }) {
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const { t } = useTranslation();
   const { colorMode } = useColorMode();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleEditClick = (id: number) => {
-    navigate(`/user/edit/${id}`);
+    navigate(`/user/tasks/${id}/edit`);
   };
 
   const handleReadMoreClick = () => {
-    navigate(`/user/task/${task.id}`, {
+    navigate(`/user/tasks/${task.id}`, {
       state: { task },
     });
   };
 
-  const handleDeleteTask = (id: number) => {
-    dispatch(deleteTask(id));
-    navigate("/user/tasks");
+  const handleDeleteClick = () => {
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    dispatch(deleteTask(task.id));
+    setDeleteModalOpen(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalOpen(false);
   };
 
   return (
@@ -73,12 +85,17 @@ function Task({ task }: { task: ITask }) {
           aria-label="Delete"
           icon={<DeleteIcon />}
           onClick={() => {
-            handleDeleteTask(task.id);
+            handleDeleteClick();
           }}
           variant="outline"
           colorScheme="red"
         />
       </Flex>
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
     </Box>
   );
 }

@@ -10,7 +10,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getUserInfo, userLogin } from "../../redux/actions/userActions";
+import { getUserInfo, userLogin } from "../../redux/thunks/userThunks";
 import { clearIsRegister } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +44,6 @@ function Login() {
     }
   }, [isAuthenticated, user]);
 
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     dispatch(
       userLogin({
@@ -65,12 +64,12 @@ function Login() {
         <FormHint
           text={t("LOGIN.TEXT_ONE.TEXT")}
           linkText={t("LOGIN.TEXT_ONE.LINK")}
-          link="/signup"
+          link="/signUp"
         />
 
         <ErrorMessage
           text={
-            errorMessage
+            errorMessage && typeof errorMessage === "string"
               ? t(`GENERAL_ERRORS.${errorMessage.toUpperCase()}`)
               : ""
           }

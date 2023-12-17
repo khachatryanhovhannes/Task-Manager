@@ -58,7 +58,7 @@ function Home() {
               bg="orange"
               hoverBackground="gray.300"
               cursor="pointer"
-              onClick={() => navigate("/signin")}
+              onClick={() => navigate("/signIn")}
               text={t("MAIN.SIGN_IN")}
             />
             <ButtonField
@@ -69,7 +69,7 @@ function Home() {
               hoverBackground="gray.300"
               border="2px solid orange"
               cursor="pointer"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/signUp")}
               text={t("MAIN.SIGN_UP")}
             />
           </Flex>

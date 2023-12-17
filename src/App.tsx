@@ -3,9 +3,10 @@ import Routing from "./navigation";
 import "./App.css";
 import { useEffect } from "react";
 import { getToken } from "./helpers";
-import { getUserInfo } from "./redux/actions/userActions";
+import { getUserInfo } from "./redux/thunks/userThunks";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { Loader } from "./components";
+import { Tokens } from "./models";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ function App() {
     (state) => state.users.isAuthenticated
   );
   useEffect(() => {
-    if (getToken("accessToken")) {
+    if (getToken(Tokens.accessToken) || getToken(Tokens.refreshToken)) {
       dispatch(getUserInfo());
     }
   }, [isAuthenticated]);

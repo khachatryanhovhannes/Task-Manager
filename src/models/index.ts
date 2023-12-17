@@ -1,8 +1,15 @@
-import { ColorMode, TaskStatus, ToastStatus, Tokens } from "./enums";
+import {
+  ColorMode,
+  TaskStatus,
+  ToastStatus,
+  Tokens,
+  SearchStatus,
+} from "./enums";
 
-export { ColorMode, TaskStatus, ToastStatus, Tokens };
+export { ColorMode, TaskStatus, ToastStatus, Tokens, SearchStatus };
 
 import {
+  IEditTask,
   ITask,
   IUser,
   IUserRegister,
@@ -14,6 +21,7 @@ import {
 } from "./interfaces";
 
 export type {
+  IEditTask,
   ITask,
   IUser,
   IUserRegister,

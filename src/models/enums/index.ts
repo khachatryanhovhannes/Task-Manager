@@ -20,4 +20,10 @@ enum Tokens {
   refreshToken = "refreshToken",
 }
 
-export { ColorMode, TaskStatus, ToastStatus, Tokens };
+const SearchStatus: Record<TaskStatus, string> = {
+  [TaskStatus.toDo]: "To%20Do",
+  [TaskStatus.inProgress]: "In%20Progress",
+  [TaskStatus.done]: "Done",
+};
+
+export { ColorMode, TaskStatus, ToastStatus, Tokens, SearchStatus };

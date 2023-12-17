@@ -183,8 +183,8 @@
   "GENERAL_ERRORS": {
     "ERR_USER_EMAIL_EXISTS": "Օգտատիրոջ էլ.փոստը գոյություն ունի",
     "ERR_USER_NAME_EXISTS": "Օգտանունը գրանցված է",
-    "ERR_USER_EMAIL_OR_PASSWORD": "սխալ էլ. հասցե կամ գաղտնաբառ",
-    "ERR_USER_NOT_EXISTS": "օգտատերը ԳՈՅՈՒԹՅՈՒՆ ՉՈՒՆԻ",
+    "ERR_USER_EMAIL_OR_PASSWORD": "Սխալ էլ. հասցե կամ գաղտնաբառ",
+    "ERR_USER_NOT_EXISTS": "Օգտատերը գոյություն չունի",
     "ERR_USER_EMAIL_IN_USE": "Օգտատիրոջ էլփոստն արդեն օգտագործվում է",
     "ERR_INVALID_ACCESS_TOKEN": "Անվավեր մուտքի նշան",
     "ERR_INVALID_REFRESH_TOKEN": "Անվավեր թարմացման նշան",

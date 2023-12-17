@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { ToastId, useToast } from "@chakra-ui/react";
 import { toastOptions } from "../../helpers";
-import { addTask } from "../../redux/actions/taskActions";
+import { addTask } from "../../redux/thunks/taskThunks";
 import { useEffect, useRef } from "react";
 
 function AddTask() {

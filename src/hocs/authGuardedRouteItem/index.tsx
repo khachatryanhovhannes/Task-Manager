@@ -13,7 +13,7 @@ function AuthGuardedRouteItem({
   const navigate = useNavigate();
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/signin");
+      navigate("/signIn");
     }
   }, [isAuthenticated]);
 

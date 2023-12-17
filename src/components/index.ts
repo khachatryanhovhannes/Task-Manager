@@ -31,6 +31,7 @@ import {
   TaskForm,
   ChangePasswordForm,
   ChangeUserData,
+  DeleteConfirmationModal,
 } from "./organisms";
 
 import { TaskModifield, Footer, UserNav, Navigation } from "./templates";
@@ -66,4 +67,5 @@ export {
   ChangePasswordForm,
   Navigation,
   ChangeUserData,
+  DeleteConfirmationModal,
 };

@@ -5,7 +5,7 @@ import { IUserChangePassword } from "../../../models";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../hooks";
-import { changePassword } from "../../../redux/actions/userActions";
+import { changePassword } from "../../../redux/thunks/userThunks";
 
 function ChangePasswordForm() {
   const { t } = useTranslation();

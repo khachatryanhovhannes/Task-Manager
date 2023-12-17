@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { IUserRegister } from "models";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { userRegister } from "../../redux/actions/userActions";
+import { userRegister } from "../../redux/thunks/userThunks";
 import { useEffect } from "react";
 // import { clearIsRegister } from "../../redux/features/userSlice";
 
@@ -39,7 +39,7 @@ function SignUp() {
 
   useEffect(() => {
     if (isRegister) {
-      navigate("/signin");
+      navigate("/signIn");
     }
     if (user) {
       navigate("/");
@@ -58,12 +58,12 @@ function SignUp() {
         <FormHint
           text={t("SIGN_UP.TEXT_ONE.TEXT")}
           linkText={t("SIGN_UP.TEXT_ONE.LINK")}
-          link="/signin"
+          link="/signIn"
         />
 
         <ErrorMessage
           text={
-            errorMessage
+            errorMessage && typeof errorMessage === "string"
               ? t(`GENERAL_ERRORS.${errorMessage.toUpperCase()}`)
               : ""
           }
